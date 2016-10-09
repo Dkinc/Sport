@@ -108,7 +108,7 @@ h6 { font-size: 12px; margin: 0 0 5px; padding: 0; }
 #site_title h1 a { display: block; width: 180px; height: 10px; padding: 40px 10px 0 0; color: #000; font-size: 14px; text-align: right; background: url(images/tooplate_logo.png) no-repeat left center }
 #site_title h1 a:hover { text-decoration: none }
 
-#tooplate_menu { float: right; width: 562px; height: 46px; background: url(images/tooplate_menu.png) no-repeat }
+#tooplate_menu { float: right; width: 562px; height: 46px; background: url(images/tooplate_logo.png) no-repeat }
 
 .newscol h2 { font-size: 14px; color: #09c2d3; font-weight: 700; border-bottom: 1px dotted #ccc }
 .newsbox { padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid #eee }

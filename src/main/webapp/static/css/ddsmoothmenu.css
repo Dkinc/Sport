@@ -52,7 +52,6 @@ display: inline-block;
 	border-top: 0;
 }
 
-.ddsmoothmenu ul li ul span.bottom { position: absolute; width: 178px; height: 13px; bottom: -13px; left: 0;  background: url(images/templatemo_smb_b.png) no-repeat; }
 
 /*Sub level menu list items (undo style from Top level List Items)*/
 .ddsmoothmenu ul li ul li{
