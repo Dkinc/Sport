@@ -131,19 +131,19 @@ ddsmoothmenu.init({
 						</tr>
 						<tr>
 							<td>User Name:</td>
-							<td><input type="text" name="username" /></td>
+							<td><input type="text" name="username" required/></td>
 						</tr>
 						<tr>
 							<td>Password:</td>
-							<td><input type="password" name="password" /></td>
+							<td><input type="password" name="password" required/></td>
 						</tr>
 						<tr>
 							<td>Repeat Password:</td>
-							<td><input type="password" name="password_cnf"  /></td>
+							<td><input type="password" name="password_cnf"  required/></td>
 						</tr>
 						<tr>
 							<td>E-mail:</td>
-							<td><input type="text" name="email" /></td>
+							<td><input type="text" name="email" required/></td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center"><input type="submit"

@@ -95,11 +95,11 @@ http://www.tooplate.com/view/2060-newspaper
 						</tr>
 						<tr>
 							<td>UserName:</td>
-							<td><input type="text" name="username" id="username" /></td>
+							<td><input type="text" name="username" id="username" required/></td>
 						</tr>
 						<tr>
 							<td>Password:</td>
-							<td><input type="password" name="password" id="passowrd" /></td>
+							<td><input type="password" name="password" id="passowrd" required/></td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center"><input type="submit"

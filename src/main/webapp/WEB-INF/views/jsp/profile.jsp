@@ -34,8 +34,32 @@ ddsmoothmenu.init({
 })
 
 </script> 
-
-
+<script type="text/javascript">  
+	function validation() {
+		var oldPassword = document.changePass.oldpass.value;
+		var newPassword = document.changePass.newpass1.value;
+		var newPassCnf = document.changePass.newpass2.value;
+		if (oldPassword =="" || newPassword == "" || newPassCnf =="") {
+			alert("Fill the fields!");
+			oldPassword.focus();
+			newPassCnf.focus();
+			newPassword.focus();
+			return false;
+		}
+		if (newPassword.length<6 || newPassword.length>45) {
+			alert("Password needs to have 6-45 characters!");
+			newPassword.focus();
+			return false;
+		}
+		if (newPassword != newPassCnf) {
+			alert("Passwords don't match!");
+			newPassword.focus();
+			newPassCnf.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
 </head>
 
 <body>
@@ -72,7 +96,7 @@ ddsmoothmenu.init({
     <div id="tooplate_main">
 
 	<div align="center">
-        <form action="changePass" method="post">
+        <form name = "changePass" onsubmit = "return validation()" action="changePass" method="post">
             <table border="0">
                 <tr>
                     <td colspan="2" align="center"><h2>Hello "${user}"</h2></td>
