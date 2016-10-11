@@ -87,14 +87,6 @@ ddsmoothmenu.init({
                     <td><form:textarea path="text" /></td>
                 </tr>
                 <tr>
-                    <td>Category:</td>
-                    <td>
-                    <form:select  path="category">
-				    <form:option value="NONE"> --SELECT--</form:option>
-				    <form:options items="${categories}"></form:options>
-				  </form:select> 	</td>
-                </tr>
-                <tr>
                     <td>Picture:</td>
                     <td><input type="file" id="file" name="picturesurl" accept="image/*"></input></td>
                 </tr>
@@ -111,7 +103,7 @@ ddsmoothmenu.init({
 
 <div id="tooplate_footer_wrapper">
 	<div id="tooplate_footer">
-    	 Copyright © 2048 Your Company Name
+    	 Copyright © Angel,Denis & Miroslav
     </div> <!-- END of tooplate_footer -->
 </div> <!-- END of tooplate_footer_wrapper -->
 
