@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +28,8 @@ public class NewsController {
 	@RequestMapping(value="/addnews", method=RequestMethod.GET)
 	public String getAddNews(HttpSession s, Model model) {
 		model.addAttribute("news", new News());
+		Map refData = new HashMap();
+		model.addAttribute("categories" , NewsManager.getInstance().categories);
 		if(s.getAttribute("loggedAs").equals("admin")){
 			return "addnews";
 		}
@@ -35,8 +39,9 @@ public class NewsController {
 	
 	@RequestMapping(value="/addnews" , method=RequestMethod.POST)
 	public String addNews(@RequestParam("picturesurl") MultipartFile multiPartFile, Model model ,@ModelAttribute News n) {
-		File fileOnDisk = new File("images/news/" + multiPartFile.getOriginalFilename());
+		File fileOnDisk = new File("D:\\images\\news\\" + multiPartFile.getOriginalFilename());
 		try {
+			fileOnDisk.createNewFile();
 			Files.copy(multiPartFile.getInputStream(), fileOnDisk.toPath(), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 			System.out.println("ERROR UPLOADING FILE!!!");

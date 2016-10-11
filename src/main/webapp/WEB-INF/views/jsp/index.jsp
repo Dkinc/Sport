@@ -58,7 +58,7 @@ ddsmoothmenu.init({
                 	<li><a href="login">Login</a></li>
 				</c:if>
 				<c:if test = "${sessionScope.loggedAs != null}">
-                	<li><a href="prifile">Profile</a></li>
+                	<li><a href="profile">Profile</a></li>
                 	<li><a href="logout">Logout</a></li>
 				</c:if>
 				<c:if test = "${sessionScope.loggedAs != admin}">
@@ -73,10 +73,15 @@ ddsmoothmenu.init({
 		<div id="slider-wrapper">
         
             <div id="slider" class="nivoSlider">
+            <c:forEach items="${NewsDAO.getInstance().allNews}" var="n" begin="0" end="4">
+            <a href=" " > <img src= "${n.getPicturesURL()}" alt="" title="${n.getTitle()}" /></a>
+			</c:forEach>
+			<!--  
                 <img src="images/slider/toystory.jpg" alt="" />
                 <a href="http://dev7studios.com"><img src="images/slider/up.jpg" alt="" title="This is an example of a caption" /></a>
                 <img src="images/slider/walle.jpg" alt="" />
                 <img src="images/slider/nemo.jpg" alt="" title="#htmlcaption" />
+            -->
             </div>
             <div id="htmlcaption" class="nivo-html-caption">
                 <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.

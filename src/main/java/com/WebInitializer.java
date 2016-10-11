@@ -1,5 +1,7 @@
 package com;
 
+import java.util.ServiceConfigurationError;
+
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
@@ -34,7 +36,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	}
 
  
-    private static final String LOCATION = "java\workspace\SpringDK\MyProject&nbspKrasi\src\main\webapp\static\images\news" // Temporary location where files will be stored
+    private static final String LOCATION = "D:\\images\\news\\"; // Temporary location where files will be stored
  
     private static final long MAX_FILE_SIZE = 5242880; // 5MB : Max file size.
                                                         // Beyond that size spring will throw exception.

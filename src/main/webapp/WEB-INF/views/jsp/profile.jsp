@@ -14,7 +14,6 @@ Template 2060 Newspaper
 http://www.tooplate.com/view/2060-newspaper
 -->
 <link href="css/tooplate_style.css" rel="stylesheet" type="text/css" />
-
 <link rel="stylesheet" href="css/nivo-slider.css" type="text/css" media="screen" />
 <link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
 <link rel="stylesheet" href="css/login.css"/>
@@ -35,12 +34,12 @@ ddsmoothmenu.init({
 })
 
 </script> 
-<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-  <script>tinymce.init({ selector:'textarea' });</script>
+
 
 </head>
 
 <body>
+
 <div id="tooplate_wrapper">
 	
     <div id="tooplate_header">
@@ -57,7 +56,7 @@ ddsmoothmenu.init({
                         <li><a href="#">Sub menu 1</a></li>
                   </ul>
                 </li>
-                <c:if test = "${sessionScope.loggedAs == null}">
+               <c:if test = "${sessionScope.loggedAs == null}">
                 	<li><a href="register">Register</a></li>
                 	<li><a href="login">Login</a></li>
 				</c:if>
@@ -73,36 +72,28 @@ ddsmoothmenu.init({
     <div id="tooplate_main">
 
 	<div align="center">
-        <form:form action="addnews" method="post" commandName="news"  enctype="multipart/form-data">
+        <form action="changePass" method="post">
             <table border="0">
                 <tr>
-                    <td colspan="2" align="center"><h2>Add news</h2></td>
+                    <td colspan="2" align="center"><h2>Hello "${user}"</h2></td>
                 </tr>
                 <tr>
-                    <td>Title:</td>
-                    <td><form:input path="title" /></td>
+                    <td>Old Password:</td>
+                    <td><input type="password" placeholder="oldpass" name="oldpass" required ></td>
                 </tr>
                 <tr>
-                    <td>Body:</td>
-                    <td><form:textarea path="text" /></td>
+                    <td>New Password:</td>
+                    <td><input type="password" placeholder="newpass1" name="newpass1" required></td>
                 </tr>
                 <tr>
-                    <td>Category:</td>
-                    <td>
-                    <form:select  path="category">
-				    <form:option value="NONE"> --SELECT--</form:option>
-				    <form:options items="${categories}"></form:options>
-				  </form:select> 	</td>
+                    <td>Confirm Password:</td>
+                    <td><input type="password" placeholder="newpass2" name="newpass2" required></td>
                 </tr>
                 <tr>
-                    <td>Picture:</td>
-                    <td><input type="file" id="file" name="picturesurl" accept="image/*"></input></td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center"><input type="submit" value="Add News" /></td>
+                    <td colspan="2" align="center"><input type="submit" value="Change Password" /></td>
                 </tr>
             </table>
-        </form:form>
+        </form>
     </div>
 
 	</div> <!-- END of tooplate_main -->   
