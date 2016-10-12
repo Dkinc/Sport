@@ -255,7 +255,7 @@ ddsmoothmenu.init({
 
 <div id="tooplate_footer_wrapper">
 	<div id="tooplate_footer">
-    	 Copyright © 2048 Your Company Name
+    	 Copyright © Angel,Denis & Miroslav
     </div> <!-- END of tooplate_footer -->
 </div> <!-- END of tooplate_footer_wrapper -->
 
