@@ -127,7 +127,10 @@ ddsmoothmenu.init({
 					onsubmit="return validation()" method="post" commandName="user">
 					<table border="0">
 						<tr>
-							<td colspan="2" align="center"><h2>Register in Sportal</h2></td>
+							<td colspan="2" align="center"><h2>Registration failed!</h2></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><h3>Please try again!</h3></td>
 						</tr>
 						<tr>
 							<td>User Name:</td>

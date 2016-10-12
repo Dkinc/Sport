@@ -20,10 +20,26 @@ public class UserController {
 		return "register";
 	}
 	
+	@RequestMapping(value="/registerFailed", method=RequestMethod.GET)
+	public String getRegisterFailed(Model model ) {
+		model.addAttribute("user", new User());
+		return "register";
+	}
+	
+	@RequestMapping(value="/registerFailed", method=RequestMethod.POST)
+	public String registerf(@ModelAttribute User u) {
+		if(UsersManager.getInstance().regUser(u.getUsername().toLowerCase(), u.getPassword(), u.getEmail())){
+			return "index";			
+		}
+		return "registerFailed";
+	}
+	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String register(@ModelAttribute User u) {
-		UsersManager.getInstance().regUser(u.getUsername().toLowerCase(), u.getPassword(), u.getEmail());
-		return "index";
+		if(UsersManager.getInstance().regUser(u.getUsername().toLowerCase(), u.getPassword(), u.getEmail())){
+			return "index";			
+		}
+		return "registerFailed";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
@@ -32,11 +48,28 @@ public class UserController {
 		return "login";
 	}
 	
+	@RequestMapping(value="/loginFailed", method=RequestMethod.GET)
+	public String getLoginFiled(Model model ) {
+		model.addAttribute("user", new User());
+		return "loginFailed";
+	}
+	
+	@RequestMapping(value="/loginFailed", method=RequestMethod.POST)
+	public String loginF(@ModelAttribute User u , HttpSession s) {
+		if(UsersManager.getInstance().validLogin(u.getUsername().toLowerCase(), u.getPassword())){
+			s.setAttribute("loggedAs", u.getUsername());
+			return "index";
+		}
+		return "loginFailed";
+	}
+	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(@ModelAttribute User u , HttpSession s) {
-		UsersManager.getInstance().validLogin(u.getUsername().toLowerCase(), u.getPassword());
-		s.setAttribute("loggedAs", u.getUsername());
-		return "index";
+		if(UsersManager.getInstance().validLogin(u.getUsername().toLowerCase(), u.getPassword())){
+			s.setAttribute("loggedAs", u.getUsername());
+			return "index";
+		}
+		return "loginFailed";
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)

@@ -85,7 +85,7 @@ ddsmoothmenu.init({
                 	<li><a href="login">Login</a></li>
 				</c:if>
 				<c:if test = "${sessionScope.loggedAs != null}">
-                	<li><a href="prifile">Profile</a></li>
+                	<li><a href="profile">Profile</a></li>
                 	<li><a href="logout">Logout</a></li>
 				</c:if>
             </ul>

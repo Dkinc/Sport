@@ -14,7 +14,6 @@ Template 2060 Newspaper
 http://www.tooplate.com/view/2060-newspaper
 -->
 <link href="css/tooplate_style.css" rel="stylesheet" type="text/css" />
-
 <link rel="stylesheet" href="css/nivo-slider.css" type="text/css"
 	media="screen" />
 <link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
@@ -24,70 +23,35 @@ http://www.tooplate.com/view/2060-newspaper
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/ddsmoothmenu.js"></script>
-<script type="text/javascript">  
-	function validation() {
-		var name = document.register.username.value;
-		var password = document.register.password.value;
-		var password2 = document.register.password_cnf.value;
-		var email = document.register.email.value;
-		var atposition=email.indexOf("@");  
-		var dotposition=email.lastIndexOf(".");
-
-		if (name == null || name == "") {
-			alert("Name can't be blank!");
-			name.focus();
-			return false;
-		} if (name.length > 45) {
-			alert("Name can't have more that 45 characters!");
-			name.focus();
-			return false;
-		}  if (password.length < 6 || password.length > 45 || password == "") {
-			alert("Password must be 6-45 characters long!");
-			password.focus();
-			return false;
-		} if (password != password2) {
-			alert("Passwords don't match!");
-			password.focus();
-			password2.focus();
-			return false;
-		}	if (email == null || email == "" ) {
-			alert("Email can't be blank!");
-			email.focus();
-			return false;
-		} if (email.length>45) {
-			alert("Email must be less than 45 characters!");
-			email.focus();
-			return false;
-		}  if (atposition<1 || dotposition<atposition+2 || dotposition+2>=email.length) {
-			alert("Please enter a valid e-mail address!");  
-			email.focus();
-			return false;  
-		}
-		return true;
-	}
-	
-</script>
-
 
 <script type="text/javascript">
-
-ddsmoothmenu.init({
-	mainmenuid: "tooplate_menu", //menu DIV id
-	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
-	classname: 'ddsmoothmenu', //class added to menu's outer DIV
-	//customtheme: ["#1c5a80", "#18374a"],
-	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
-})
-
+	ddsmoothmenu.init({
+		mainmenuid : "tooplate_menu", //menu DIV id
+		orientation : 'h', //Horizontal or vertical menu: Set to "h" or "v"
+		classname : 'ddsmoothmenu', //class added to menu's outer DIV
+		//customtheme: ["#1c5a80", "#18374a"],
+		contentsource : "markup" //"markup" or ["container_id", "path_to_menu_file"]
+	})
 </script>
+<script type="text/javascript">
+	function validation() {
+		var name = document.login.username.value;
+		var password = document.login.password.value;
 
+		if (username == "" || password == "") {
+			alert("Fill fields please!");
+			username.focus();
+			password.focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
 
 </head>
 
 <body>
-	<c:if test="${sessionScope.loggedAs != admin}">
-		<c:redirect context="index" />
-	</c:if>
 
 	<div id="tooplate_wrapper">
 
@@ -123,31 +87,27 @@ ddsmoothmenu.init({
 		<div id="tooplate_main">
 
 			<div align="center">
-				<form:form name="register" action="register"
-					onsubmit="return validation()" method="post" commandName="user">
+				<form:form name = "login" action="login" onsubmit="return validation()"
+					method="post" commandName="user">
 					<table border="0">
 						<tr>
-							<td colspan="2" align="center"><h2>Register in Sportal</h2></td>
+							<td colspan="2" align="center"><h2>Login Failed</h2></td>
 						</tr>
 						<tr>
-							<td>User Name:</td>
-							<td><input type="text" name="username" required/></td>
+							<td colspan="2" align="center"><h3>Please try again</h3></td>
+						
+						</tr>
+						<tr>
+							<td>UserName:</td>
+							<td><input type="text" name="username" id="username" required/></td>
 						</tr>
 						<tr>
 							<td>Password:</td>
-							<td><input type="password" name="password" required/></td>
-						</tr>
-						<tr>
-							<td>Repeat Password:</td>
-							<td><input type="password" name="password_cnf"  required/></td>
-						</tr>
-						<tr>
-							<td>E-mail:</td>
-							<td><input type="text" name="email" required/></td>
+							<td><input type="password" name="password" id="passowrd" required/></td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center"><input type="submit"
-								value="Register" /></td>
+								value="Login" /></td>
 						</tr>
 					</table>
 				</form:form>
