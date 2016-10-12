@@ -33,7 +33,8 @@ public class NewsDAO {
 										resultSet.getString("text"),
 										resultSet.getString("category"),
 										resultSet.getString("picture_address"),
-										resultSet.getString("video_address")
+										resultSet.getString("video_address"),
+										resultSet.getInt("number_of_reads")
 										));
 			}
 		} catch (SQLException e) {
@@ -47,13 +48,14 @@ public class NewsDAO {
 	public void addNews(News n){
 		try {
 			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO news (title, text, Category_of_news_idCategory_of_news,"
-					+ "picture_address, video_address) VALUES (?,?,?,?,?);");
+					+ "picture_address, video_address, number_of_reads) VALUES (?,?,?,?,?,?);");
 			
 			st.setString(1, n.getTitle());
 			st.setString(2, n.getText());
 			st.setInt(3, getCategoryId(n.getCategory()));
 			st.setString(4, n.getPicturesURL());
 			st.setString(5, n.getVideoURL());
+			st.setInt(6, n.getNumberOfReads());
 		
 			
 			st.executeUpdate();
@@ -62,6 +64,23 @@ public class NewsDAO {
 			System.out.println("!!! did not save the news!!!");
 			e.printStackTrace();
 		}		
+	}
+	
+	public synchronized HashSet<String> getCategories(){
+		HashSet<String> categories = new HashSet<>();
+		try {
+			Statement st = DBManager.getInstance().getConnection().createStatement();
+			ResultSet resultSet = st.executeQuery("SELECT category FROM category_of_news");
+			while(resultSet.next()){
+				categories.add(resultSet.getString("category"));
+			}
+			return categories;
+			
+		} catch (SQLException e) {
+			System.out.println("problems with getCategories method !!!");
+			e.printStackTrace();
+		}
+		return categories;
 	}
 	
 	int getCategoryId(String category){

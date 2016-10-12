@@ -40,6 +40,7 @@ http://www.tooplate.com/view/2060-newspaper
 		selector : 'textarea'
 	});
 </script>
+<!-- 
 <script type="text/javascript">
 	function validation() {
 		var title = document.addNews.title.value;
@@ -54,6 +55,7 @@ http://www.tooplate.com/view/2060-newspaper
 		}
 	}
 </script>
+ -->
 </head>
 
 <body>
@@ -100,12 +102,20 @@ http://www.tooplate.com/view/2060-newspaper
 						</tr>
 						<tr>
 							<td>Title:</td>
-							<td><input type="text" name="title" required/></td>
+							<td><form:input path="title" /></td>
 						</tr>
 						<tr>
 							<td>Body:</td>
-							<td><input type="text" name="text" required/></td>
+							<td><form:textarea path="text"/></td>
 						</tr>
+						 <tr>
+                   		 	<td>Category:</td>
+		                    <td>
+		                    <form:select  path="category">
+						    <form:option value="NONE"> --SELECT--</form:option>
+						    <form:options items="${categories}"></form:options>
+						  </form:select> 	</td>
+               			 </tr>
 						<tr>
 							<td>Picture:</td>
 							<td><input type="file" id="file" name="picturesurl"

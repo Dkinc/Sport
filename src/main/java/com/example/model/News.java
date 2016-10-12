@@ -8,23 +8,22 @@ public class News {
 //	private TreeSet<String> picturesURL;// picures for concrete news, #pictures = equal or more than 1 and less than 5 - complicated.More columns for pics in db .
 	private String picturesURL;
 	private String videoURL;
-	private int numberOfReads = 0;
+	private int numberOfReads;
 	
-	public News(String title, String text, String category, String picturesURL, String videoURL) {
+	public News(String title, String text, String category, String picturesURL, String videoURL, int numberOfReads) {
 		this.title = title;
 		this.text = text;
 		this.category = category;
 		this.picturesURL = picturesURL;
 		this.videoURL = videoURL;
-		this.numberOfReads = 0;
 	}
 
-	public News(String title, String text, String category, String picturesURL) {
+	public News(String title, String text, String category, String picturesURL, int numberOfReads) {
 		this.title = title;
 		this.text = text;
 		this.category = category;
 		this.picturesURL = picturesURL;
-		this.numberOfReads = 0;
+		this.numberOfReads = numberOfReads;
 	}
 
 	public News() {

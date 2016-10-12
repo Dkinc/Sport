@@ -2,11 +2,14 @@ package com.example.model;
 
 import java.util.HashSet;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.model.db.NewsDAO;
 
 public class NewsManager {
 
 private HashSet<News> allNews;
+public HashSet<String> categories;
 	
 	
 	private static NewsManager instance;
@@ -16,6 +19,25 @@ private HashSet<News> allNews;
 		for(News m : NewsDAO.getInstance().getAllNews()){
 			allNews.add(m);
 		}
+		categories = new HashSet<String>();
+		for(String s : NewsDAO.getInstance().getCategories()){
+			categories.add(s);
+		}
+	}
+	
+	public synchronized HashSet<News> getMainNews(){
+		HashSet<News> mainNews = new HashSet<News>();
+		int count = 0;
+		for(News n : allNews){
+			if(count < 4){
+			mainNews.add(n);
+			count++;
+			}
+			else{
+				break;
+			}
+		}
+		return mainNews;
 	}
 	
 	public synchronized static NewsManager getInstance(){
@@ -28,15 +50,24 @@ private HashSet<News> allNews;
 	 * Accessible only for Admin (method addNews(...))
 	 */
 	public synchronized void makeNews(String title, String text, String category, String picturesURL, String videoURL){
-		News n = new News(title, text, category, picturesURL, videoURL);
+		News n = new News(title, text, category, picturesURL, videoURL, 0);
 		allNews.add(n);
 		NewsDAO.getInstance().addNews(n);
 	}
 	
+	public synchronized boolean validateNews(String title, String text, String category, MultipartFile mpf){
+		 if(title != null && title != "" && text !=null && text != "" && category != null && category != "" && !mpf.isEmpty()){
+			 return true;
+		 }
+		 return false;
+		
+	}
+	
 	 public synchronized void makeNews(String title, String text, String category, String picturesURL) {
-		 News n = new News(title, text, category, picturesURL);
+		 News n = new News(title, text, category, picturesURL, 0);
 			allNews.add(n);
 			NewsDAO.getInstance().addNews(n);
+			System.out.println("NEWS MADE");
 	 }
 
 	

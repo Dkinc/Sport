@@ -13,26 +13,27 @@ import com.example.model.User;
 
 public class UserDAO {
 
-	private static UserDAO instance;
-
-	private UserDAO() {
-	}
-
-	public synchronized static UserDAO getInstance() {
-		if (instance == null) {
+private static UserDAO instance;
+	
+	private UserDAO(){}
+	
+	public synchronized static UserDAO getInstance(){
+		if(instance == null){
 			instance = new UserDAO();
 		}
 		return instance;
 	}
-
-	public Set<User> getAllUsers() {
+	
+	public Set<User> getAllUsers(){
 		Set<User> users = new HashSet<User>();
 		try {
 			Statement st = DBManager.getInstance().getConnection().createStatement();
 			ResultSet resultSet = st.executeQuery("SELECT username, password, email FROM users;");
-			while (resultSet.next()) {
-				users.add(new User(resultSet.getString("username"), resultSet.getString("password"),
-						resultSet.getString("email")));
+			while(resultSet.next()){
+				users.add(new User(	resultSet.getString("username"),
+									resultSet.getString("password"),
+									resultSet.getString("email")
+									));
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL exception!!! Users not load!");
@@ -41,15 +42,14 @@ public class UserDAO {
 		System.out.println("Users loaded successfully");
 		return users;
 	}
-
+	
 	public void saveUser(User user) {
 		try {
-			String hashedPassword = passwordHash(user.getPassword());
 			System.out.println(user.getEmail());
 			PreparedStatement st = DBManager.getInstance().getConnection()
 					.prepareStatement("INSERT INTO users (username, password, email) VALUES (?, ?, ?);");
 			st.setString(1, user.getUsername());
-			st.setString(2, hashedPassword);
+			st.setString(2, user.getPassword());
 			st.setString(3, user.getEmail());
 			st.executeUpdate();
 			System.out.println("User added successfully");
@@ -73,18 +73,17 @@ public class UserDAO {
 	}
 
 	public void writeNewProfilePic(String username, String url) {
-
+		
 		try {
 			Statement st = DBManager.getInstance().getConnection().createStatement();
-			st.executeUpdate(
-					"UPDATE user_profile SET profile_pic = " + url + " WHERE Users_username = " + username + " ;");
+			st.executeUpdate("UPDATE user_profile SET profile_pic = " + url +" WHERE Users_username = " + username + " ;");
 		} catch (SQLException e) {
 			System.out.println("Problems with change password!");
 			e.printStackTrace();
 		}
 	}
-
-	private static String passwordHash(String password) {
+	
+	public static String passwordHash(String password) {
 		MessageDigest md;
 		StringBuffer sb = new StringBuffer();
 		try {
@@ -105,5 +104,5 @@ public class UserDAO {
 		}
 		return sb.toString();
 	}
-
+	
 }

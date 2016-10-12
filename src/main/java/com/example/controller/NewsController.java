@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,6 +29,8 @@ public class NewsController {
 	@RequestMapping(value="/addnews", method=RequestMethod.GET)
 	public String getAddNews(HttpSession s, Model model) {
 		model.addAttribute("news", new News());
+		Map refData = new HashMap();
+		model.addAttribute("categories" , NewsManager.getInstance().categories);
 		if(s.getAttribute("loggedAs").equals("admin")){
 			return "addnews";
 		}
@@ -36,15 +40,18 @@ public class NewsController {
 	
 	@RequestMapping(value="/addnews" , method=RequestMethod.POST)
 	public String addNews(@RequestParam("picturesurl") MultipartFile multiPartFile, Model model ,@ModelAttribute News n) {
-		File fileOnDisk = new File("images/news/" + multiPartFile.getOriginalFilename());
-		try {
-			Files.copy(multiPartFile.getInputStream(), fileOnDisk.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			System.out.println("ERROR UPLOADING FILE!!!");
-			e.printStackTrace();
+		if(NewsManager.getInstance().validateNews(n.getTitle(), n.getText(), n.getCategory(), multiPartFile)){
+			System.out.println("Validation Succsessful!");
+			File fileOnDisk = new File("images/news/" + multiPartFile.getOriginalFilename());
+			try {
+				Files.copy(multiPartFile.getInputStream(), fileOnDisk.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				System.out.println("ERROR UPLOADING FILE!!!");
+				e.printStackTrace();
+			}
+			model.addAttribute("filename", multiPartFile.getOriginalFilename());
+			NewsManager.getInstance().makeNews(n.getTitle(), n.getText(), n.getCategory(), IMAGES_LOCATION + multiPartFile.getOriginalFilename());
 		}
-		model.addAttribute("filename", multiPartFile.getOriginalFilename());
-		NewsManager.getInstance().makeNews(n.getTitle(), n.getText(), n.getCategory(), IMAGES_LOCATION + multiPartFile.getOriginalFilename());
 		return "addnews";
 	}
 	
