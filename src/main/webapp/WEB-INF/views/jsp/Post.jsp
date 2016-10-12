@@ -81,7 +81,7 @@ ddsmoothmenu.init({
 		<div id="content" class="float_l">
         	<div class="post">
             	
-            <h2>Lorem Ipsum Dolor Sit Amet</h2>
+            <h2>${news.getTitle()}</h2>
                     
             <img src="images/blog/01.jpg" alt="" />   
             <div class="meta">

@@ -73,6 +73,11 @@ ddsmoothmenu.init({
 		<div id="slider-wrapper">
         
             <div id="slider" class="nivoSlider">
+			<!--  
+            <c:forEach items="${mainNews}" var="n" begin="0" end="4">
+            <a href=" " > <img src= "images/news/${n.getPicturesURL()}" alt="" title="${n.getTitle()}" /></a>
+			</c:forEach>
+            -->
                 <img src="images/slider/toystory.jpg" alt="" />
                 <a href="http://dev7studios.com"><img src="images/slider/up.jpg" alt="" title="This is an example of a caption" /></a>
                 <img src="images/slider/walle.jpg" alt="" />
@@ -98,9 +103,9 @@ ddsmoothmenu.init({
         <div class="newscol col half">
 	        <h2>Business</h2>
             <div class="newsbox col one_fourth">
-            	<a href="fullpost.html"><img src="images/tooplate_image_01.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>This is free HTML template by tooplate website.</p>
+            <a href="post" > <img src= "${news.getPicturesURL()}" alt="" title="${news.getTitle()}" /></a>
+            <h6><a href="post"  >${news.getTitle()} </a></h6>
+            <h6>${news.getPicturesURL()}</h6>
            	  <div class="cleaner"></div>
             </div>
             <div class="newsbox col one_fourth no_margin_right">

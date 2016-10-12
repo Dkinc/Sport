@@ -38,7 +38,7 @@ public class NewsDAO {
 										));
 			}
 		} catch (SQLException e) {
-			System.out.println(" Cannot make statement in getAllNews .");
+			System.out.println("Cannot make statement in getAllNews .");
 			return allNews;
 		}
 		System.out.println("allNews loaded successfully");

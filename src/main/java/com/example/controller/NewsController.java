@@ -8,11 +8,13 @@ import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +26,7 @@ import com.example.model.NewsManager;
 @Controller
 public class NewsController {
 	
-	private static final String IMAGES_LOCATION = "images/news/";
+	private static final String IMAGES_LOCATION = "images\\news\\";
 
 	@RequestMapping(value="/addnews", method=RequestMethod.GET)
 	public String getAddNews(HttpSession s, Model model) {
@@ -42,7 +44,7 @@ public class NewsController {
 	public String addNews(@RequestParam("picturesurl") MultipartFile multiPartFile, Model model ,@ModelAttribute News n) {
 		if(NewsManager.getInstance().validateNews(n.getTitle(), n.getText(), n.getCategory(), multiPartFile)){
 			System.out.println("Validation Succsessful!");
-			File fileOnDisk = new File("images/news/" + multiPartFile.getOriginalFilename());
+			File fileOnDisk = new File("images\\news\\" + multiPartFile.getOriginalFilename());
 			try {
 				Files.copy(multiPartFile.getInputStream(), fileOnDisk.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {
@@ -53,6 +55,14 @@ public class NewsController {
 			NewsManager.getInstance().makeNews(n.getTitle(), n.getText(), n.getCategory(), IMAGES_LOCATION + multiPartFile.getOriginalFilename());
 		}
 		return "addnews";
+	}
+	
+	@RequestMapping(value="/post", method=RequestMethod.GET)
+	public String getPost(HttpSession s, Model model,HttpServletRequest req) {
+		String title = (String) req.getAttribute("title");
+		News news = NewsManager.getInstance().getNewsByTitle(title);
+		model.addAttribute("news", news);
+		return "post";
 	}
 	
 }
