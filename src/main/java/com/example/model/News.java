@@ -28,7 +28,6 @@ public class News {
 	}
 
 	public News() {
-		this.numberOfReads = 0;
 	}
 
 	public String getTitle() {

@@ -22,7 +22,7 @@ public class NewsDAO {
 		return instance;
 	}
 	
-	public synchronized HashSet<News> getAllNews(){
+	public HashSet<News> getAllNews(){
 		HashSet<News> allNews = new HashSet<News>(); 
 		try {
 			Statement st = DBManager.getInstance().getConnection().createStatement();
@@ -44,17 +44,16 @@ public class NewsDAO {
 		return allNews;
 	}
 	
-	public synchronized void addNews(News n){
+	public void addNews(News n){
 		try {
 			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO news (title, text, Category_of_news_idCategory_of_news,"
-					+ "picture_address, video_address, number_of_reads) VALUES (?,?,?,?,?,?);");
+					+ "picture_address, video_address) VALUES (?,?,?,?,?);");
 			
 			st.setString(1, n.getTitle());
 			st.setString(2, n.getText());
 			st.setInt(3, getCategoryId(n.getCategory()));
 			st.setString(4, n.getPicturesURL());
 			st.setString(5, n.getVideoURL());
-			st.setInt(6, n.getNumberOfReads());
 		
 			
 			st.executeUpdate();
@@ -65,34 +64,17 @@ public class NewsDAO {
 		}		
 	}
 	
-	public synchronized HashSet<String> getCategories(){
-		HashSet<String> categories = new HashSet<>();
-		try {
-			Statement st = DBManager.getInstance().getConnection().createStatement();
-			ResultSet resultSet = st.executeQuery("SELECT category FROM category_of_news");
-			while(resultSet.next()){
-				categories.add(resultSet.getString("category"));
-			}
-			return categories;
-			
-		} catch (SQLException e) {
-			System.out.println("problems with getCategories method !!!");
-			e.printStackTrace();
-		}
-		return categories;
-	}
-	
-	private synchronized int getCategoryId(String category){
+	int getCategoryId(String category){
 		try {
 			Statement st = DBManager.getInstance().getConnection().createStatement();
 			ResultSet resultSet = st.executeQuery("SELECT  idCategory_of_news FROM category_of_news WHERE category = " + category + ";");
-			return resultSet.getInt("idCategory_of_news");
+			return (int)resultSet.getInt("idCategory_of_news");
 			
 		} catch (SQLException e) {
 			System.out.println("problems with getCategoryId method !!!");
 			e.printStackTrace();
-			return 0;
 		}
+		return -1; 
 	}
 	
 }

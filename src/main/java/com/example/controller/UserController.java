@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -35,11 +34,9 @@ public class UserController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(@ModelAttribute User u , HttpSession s) {
-		if(UsersManager.getInstance().validLogin(u.getUsername().toLowerCase(), u.getPassword())){
-			s.setAttribute("loggedAs", u.getUsername());
-			return "index";			
-		}
-		return "login";
+		UsersManager.getInstance().validLogin(u.getUsername().toLowerCase(), u.getPassword());
+		s.setAttribute("loggedAs", u.getUsername());
+		return "index";
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
@@ -48,24 +45,4 @@ public class UserController {
 		return "index";
 	}
 	
-	@RequestMapping(value="/profile", method=RequestMethod.GET)
-	public String getProfile(Model model, HttpSession s ) {
-		model.addAttribute("user", s.getAttribute("loggedAs"));
-		return "profile";
-	}
-	
-	@RequestMapping(value="/changePass", method=RequestMethod.POST)
-	public String changePass(Model model, HttpServletRequest req , HttpSession s) {
-		String oldPass = (String) req.getParameter("oldpass");
-		String newPass1 = (String) req.getParameter("newpass1");
-		String newPass2 = (String) req.getParameter("newpass2");
-		String username = (String) s.getAttribute("loggedAs");
-		if(UsersManager.getInstance().validLogin(username.toLowerCase(), oldPass)){
-			if(newPass1.equals(newPass2)){
-				UsersManager.getInstance().getUser(username).changePassword(newPass1);
-			}
-		}
-		
-		return "profile";
-	}
 }

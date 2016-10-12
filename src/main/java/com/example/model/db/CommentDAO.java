@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.HashSet;
 
 import com.example.model.Comment;
@@ -28,14 +29,13 @@ public class CommentDAO {
 			HashSet<Comment> comments = new HashSet<Comment>();
 			try {
 				Statement st = DBManager.getInstance().getConnection().createStatement();
-				ResultSet resultSet = st.executeQuery("SELECT C.title_of_comment, C.text, C.date_and_time, U.username, N.title"
+				ResultSet resultSet = st.executeQuery("SELECT C.text, C.date_and_time, U.username, N.title"
 						+ " FROM comments C JOIN users U ON C.Users_idUsers = U.idUsers"
 						+ "JOIN news N ON C.News_idNews = N.idNews"
 						+ " ORDER BY date_and_time Desc;");
 				while(resultSet.next()){
-					comments.add(new Comment(	resultSet.getString("title_of_comment"),
-												resultSet.getString("text"),
-												resultSet.getString("date_and_time"),
+					comments.add(new Comment(	resultSet.getString("text"),
+												resultSet.getTimestamp("date_and_time").toLocalDateTime(),
 												resultSet.getString("title"),
 												resultSet.getString("username")
 											));
@@ -63,15 +63,17 @@ public class CommentDAO {
 		
 		public void addComment(Comment c){
 			try {
-				PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO comments (title_of_comment, text,"
-						+ " date_and_time, title, username) VALUES (?,?,?,?,?);");
+				PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO comments ( text,"
+						+ " date_and_time, title, username, number_of_likes, number_of_dislikes) VALUES (?,?,?,?,?,?,?);");
 				
-				st.setString(1, c.getTitle());
-				st.setString(2, c.getText());
-				st.setString(3, c.getDateAndTime());
-				st.setString(4, c.getNewsTitle());
-				st.setString(5, c.getUsername());
+				Calendar cal = Calendar.getInstance();
 				
+				st.setString(1, c.getText());
+				st.setDate(2, new java.sql.Date(cal.getTimeInMillis()));
+				st.setString(3, c.getNewsTitle());
+				st.setString(4, c.getUsername());
+				st.setInt(5, c.getLikes());
+				st.setInt(6, c.getDislikes());
 				
 				st.executeUpdate();
 				System.out.println("Comment added successfully");

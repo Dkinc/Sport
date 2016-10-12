@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 
 import com.example.model.db.CommentDAO;
@@ -25,19 +26,10 @@ private HashSet<Comment> allComments;
 		return instance;
 	}
 	
-	public synchronized void makeComment(String title, String text, String dateAndTime, String newsTitle, String username ){
-		Comment c = new Comment(title, text, dateAndTime, newsTitle, username);
+	public synchronized void makeComment(String text, LocalDateTime dateAndTime, String newsTitle, String username){
+		Comment c = new Comment(text, dateAndTime, newsTitle, username);
 		allComments.add(c);
 		CommentDAO.getInstance().addComment(c);
 	}
 	
-	public synchronized HashSet<Comment> searchComment(String title){
-		 HashSet<Comment> searchResult = new HashSet<Comment>();
-			for (Comment c : allComments) {
-				if(c.getTitle().contains(title) || title.contains(c.getTitle())){
-					searchResult.add(c);
-				}
-			}
-			return searchResult;
-    }
 }

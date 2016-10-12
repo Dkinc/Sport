@@ -7,7 +7,6 @@ import com.example.model.db.NewsDAO;
 public class NewsManager {
 
 private HashSet<News> allNews;
-public HashSet<String> categories;
 	
 	
 	private static NewsManager instance;
@@ -17,25 +16,6 @@ public HashSet<String> categories;
 		for(News m : NewsDAO.getInstance().getAllNews()){
 			allNews.add(m);
 		}
-		categories = new HashSet<String>();
-		for(String s : NewsDAO.getInstance().getCategories()){
-			categories.add(s);
-		}
-	}
-	
-	public synchronized HashSet<News> getMainNews(){
-		HashSet<News> mainNews = new HashSet<News>();
-		int count = 0;
-		for(News n : allNews){
-			if(count < 4){
-			mainNews.add(n);
-			count++;
-			}
-			else{
-				break;
-			}
-		}
-		return mainNews;
 	}
 	
 	public synchronized static NewsManager getInstance(){
@@ -54,7 +34,6 @@ public HashSet<String> categories;
 	}
 	
 	 public synchronized void makeNews(String title, String text, String category, String picturesURL) {
-		 System.out.println("PIC URL - " + picturesURL);
 		 News n = new News(title, text, category, picturesURL);
 			allNews.add(n);
 			NewsDAO.getInstance().addNews(n);
@@ -79,7 +58,7 @@ public HashSet<String> categories;
 					return news;
 				}
 			}
-			return new News(title, "No such news", " ", " ", " ");
+			return null;
     }
 	 
 	 public synchronized HashSet<News> searchNewsByCategory(String category){

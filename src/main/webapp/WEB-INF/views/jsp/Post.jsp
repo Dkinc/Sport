@@ -362,7 +362,7 @@ ddsmoothmenu.init({
 
 <div id="tooplate_footer_wrapper">
 	<div id="tooplate_footer">
-    	 Copyright © Angel,Denis & Miroslav
+    	 Copyright © 2048 Your Company Name 
     </div> <!-- END of tooplate_footer -->
 </div> <!-- END of tooplate_footer_wrapper -->
 

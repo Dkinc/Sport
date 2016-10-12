@@ -1,27 +1,35 @@
 package com.example.model;
 
+import java.time.LocalDateTime;
+
 public class Comment {
 
-	private String title;
+	
 	private String text;
-	private String dateAndTime; // time of publishing
-	private int likes;
-	private int dislikes;
-	private String newsTitle; // zaglavieto na nowinata za koqto se otnasq komentara
-	private String username; // username na usera koito pishe komentara
+	private LocalDateTime dateAndTime; 
+	private int likes = 0;
+	private int dislikes = 0;
+	private String newsTitle;
+	private String username; 
 
+	public Comment(){}
 
-	public Comment(String title, String text, String dateAndTime, String newsTitle, String username ) {
+	public Comment(String text, LocalDateTime dateAndTime, String newsTitle, String username ) {
 		super();
 		this.newsTitle = newsTitle;
 		this.username = username;
 		this.text = text;
-		this.title = title;
 		this.dateAndTime = dateAndTime;
-		this.likes = 0;
-		this.dislikes = 0;
 	}
 
+	public void likeComment(){
+		this.likes++;
+	}
+	
+	public void disLikeComment(){
+		this.dislikes++;
+	}
+	
 	public String getNewsTitle() {
 		return newsTitle;
 	}
@@ -46,12 +54,12 @@ public class Comment {
 		return text;
 	}
 
-	public String getDateAndTime() {
+	public LocalDateTime getDateAndTime() {
 		return dateAndTime;
 	}
 
-	public void setDateAndTime(String dateAndTime) {
-		if(dateAndTime != null && dateAndTime != ""){
+	public void setDateAndTime(LocalDateTime dateAndTime) {
+		if(dateAndTime != null){
 			this.dateAndTime = dateAndTime;
 		}
 	}
@@ -59,16 +67,6 @@ public class Comment {
 	public void setText(String text) {
 		if(text != null && text != ""){
 			this.text = text;
-		}
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		if(title != null && title != ""){
-			this.title = title;
 		}
 	}
 

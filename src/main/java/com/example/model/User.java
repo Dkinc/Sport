@@ -81,10 +81,10 @@ public class User {
 	}
 
 	public void changePassword(String password){
-//		if(isStrongPassword(password)){
+		if(isStrongPassword(password)){
 			this.password = password;
 			UserDAO.getInstance().writeNewPassword(this.getUsername(),password);
-//		}
+		}
 	}
 	
 	public void changeProfilePic(String url){
