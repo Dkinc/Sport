@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import com.example.model.News;
@@ -26,10 +27,11 @@ public class NewsDAO {
 		HashSet<News> allNews = new HashSet<News>(); 
 		try {
 			Statement st = DBManager.getInstance().getConnection().createStatement();
-			ResultSet resultSet = st.executeQuery("SELECT N.title, N.number_of_reads, N.picture_address, N.video_address, N.text, C.category FROM"
-					+ " news N INNER JOIN category_of_news C ON N.Category_of_news_idCategory_of_news = C.idCategory_of_news ORDER BY category Desc;");
+			ResultSet resultSet = st.executeQuery("SELECT N.idNews, N.title, N.number_of_reads, N.picture_address, N.video_address, N.text, C.category FROM"
+					+ " news N INNER JOIN category_of_news C ON N.Category_of_news_idCategory_of_news = C.idCategory_of_news ORDER BY idNews Desc;");
 			while(resultSet.next()){
-				allNews.add(new News(	resultSet.getString("title"),
+				allNews.add(new News(	resultSet.getInt("idNews"),
+										resultSet.getString("title"),
 										resultSet.getString("text"),
 										resultSet.getString("category"),
 										resultSet.getString("picture_address"),
@@ -52,7 +54,7 @@ public class NewsDAO {
 			
 			st.setString(1, n.getTitle());
 			st.setString(2, n.getText());
-			st.setInt(3, getCategoryId(n.getCategory()));
+			st.setInt(3, getIdByCategory().get(n.getCategory()));
 			st.setString(4, n.getPicturesURL());
 			st.setString(5, n.getVideoURL());
 			st.setInt(6, n.getNumberOfReads());
@@ -83,17 +85,21 @@ public class NewsDAO {
 		return categories;
 	}
 	
-	int getCategoryId(String category){
+	public synchronized HashMap<String,Integer> getIdByCategory(){
+		HashMap<String,Integer> categories = new HashMap<>();
 		try {
 			Statement st = DBManager.getInstance().getConnection().createStatement();
-			ResultSet resultSet = st.executeQuery("SELECT  idCategory_of_news FROM category_of_news WHERE category = " + category + ";");
-			return (int)resultSet.getInt("idCategory_of_news");
+			ResultSet resultSet = st.executeQuery("SELECT idCategory_of_news, category FROM category_of_news");
+			while(resultSet.next()){
+				categories.put( resultSet.getString("category"), resultSet.getInt("idCategory_of_news"));
+			}
+			return categories;
 			
 		} catch (SQLException e) {
-			System.out.println("problems with getCategoryId method !!!");
+			System.out.println("problems with getCategories method !!!");
 			e.printStackTrace();
 		}
-		return -1; 
+		return categories;
 	}
 	
 }

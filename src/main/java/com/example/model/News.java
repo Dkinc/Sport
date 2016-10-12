@@ -1,7 +1,8 @@
 package com.example.model;
 
 public class News {
-
+	
+	private int idNews;
 	private String title;
 	private String text;
 	private String category;
@@ -10,7 +11,8 @@ public class News {
 	private String videoURL;
 	private int numberOfReads;
 	
-	public News(String title, String text, String category, String picturesURL, String videoURL, int numberOfReads) {
+	public News(int idNews, String title, String text, String category, String picturesURL, String videoURL, int numberOfReads) {
+		this.idNews = idNews;
 		this.title = title;
 		this.text = text;
 		this.category = category;
@@ -18,7 +20,8 @@ public class News {
 		this.videoURL = videoURL;
 	}
 
-	public News(String title, String text, String category, String picturesURL, int numberOfReads) {
+	public News(int idNews, String title, String text, String category, String picturesURL, int numberOfReads) {
+		this.idNews = idNews;
 		this.title = title;
 		this.text = text;
 		this.category = category;
@@ -68,7 +71,7 @@ public class News {
 	}
 
 	public int getNumberOfReads() {
-		return numberOfReads;
+		return ++numberOfReads;
 	}
 
 	public void setNumberOfReads(int numberOfReads) {
@@ -85,6 +88,14 @@ public class News {
 //		if(new Admin().isValidImageURL(picturesURL)){
 //			this.picturesURL = picturesURL;
 //		}
+	}
+
+	public int getIdNews() {
+		return idNews;
+	}
+
+	public void setIdNews(int idNews) {
+		this.idNews = idNews;
 	}
 
 }

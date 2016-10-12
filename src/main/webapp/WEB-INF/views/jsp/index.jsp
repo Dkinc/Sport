@@ -103,15 +103,15 @@ ddsmoothmenu.init({
         <div class="newscol col half">
 	        <h2>Business</h2>
             <div class="newsbox col one_fourth">
-            <a href="post" > <img src= "${news.getPicturesURL()}" alt="" title="${news.getTitle()}" /></a>
-            <h6><a href="post"  >${news.getTitle()} </a></h6>
+            <a href="${news.getIdNews()}" > <img src= "${news.getPicturesURL()}" alt="" title="${news.getTitle()}" /></a>
+            <h6><a href="${news.getIdNews()}"  >${news.getTitle()} </a></h6>
             <h6>${news.getPicturesURL()}</h6>
            	  <div class="cleaner"></div>
             </div>
             <div class="newsbox col one_fourth no_margin_right">
-            	<a href="fullpost.html"><img src="images/tooplate_image_02.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
+            	<a href="${news.getIdNews()}" > <img src= "${news.getPicturesURL()}" alt="" title="${news.getTitle()}" /></a>
+            <h6><a href="${news.getIdNews()}"  >${news.getTitle()} </a></h6>
+            <h6>${news.getPicturesURL()}</h6>
            	  <div class="cleaner"></div>
             </div>
             <div class="newsbox col one_fourth">

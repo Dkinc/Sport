@@ -83,14 +83,13 @@ ddsmoothmenu.init({
             	
             <h2>${news.getTitle()}</h2>
                     
-            <img src="images/blog/01.jpg" alt="" />   
+            <img src="${news.getPicturesURL()}" alt="" />   
             <div class="meta">
-                <span class="admin">Admin</span><span class="date">March 03, 2048</span><span class="tag"><a href="#">Freebie</a>, <a href="#">Template</a></span><span class="comment"><a href="#">5 Comments</a></span>
+                <span class="admin">Admin</span><span class="date">March 03, 2048</span><span class="tag"> ${news.getNumberOfReads()}</span><span class="comment"><a href="#">5 Comments</a></span>
                 <div class="cleaner"></div>
             </div> 
             
-            <p>Cras eget fermentum sem. Maecenas nec purus lorem, a sodales lectus. Etiam consequat nulla sit amet nisl volutpat ornare. Donec purus nulla, egestas ac porttitor et, pharetra nec felis. Donec lobortis fringilla blandit. Fusce a purus vel justo pulvinar tempor.</p>
-            <p>Validate <a href="http://validator.w3.org/check?uri=referer" rel="nofollow">XHTML</a> &amp; <a href="http://jigsaw.w3.org/css-validator/check/referer" rel="nofollow">CSS</a>. Morbi venenatis augue sit amet ante facilisis feugiat sed in lectus. Vivamus imperdiet, ante a pretium vehicula, ante enim sodales mi, eu rutrum odio turpis eget arcu. Proin a elit nisl, id aliquam felis. Nunc ultrices iaculis quam, sed commodo erat tempus mollis. Duis ultricies nulla sed dolor egestas id. Lorem ipsum dolor sit amet, <a href="#">consectetur</a> adipiscing elit. Etiam nec turpis bibendum massa dapibus dictum. Donec eu odio sapien. Donec tincidunt eleifend mauris, ac volutpat leo tincidunt a. Aenean vel vehicula augue. Vestibulum lectus sem, porttitor non molestie quis, pulvinar nec nulla.</p>
+            <p>${news.getText()}</p>
 </div>
         
            <div class="cleaner h40"></div>
@@ -253,112 +252,11 @@ ddsmoothmenu.init({
             	</div>
             <div class="cleaner"></div>
         </div>
-        
-        <div id="sidebar" class="float_r">
-        	<a href="#"><img src="images/ad_300.jpg" alt="image" /></a>
-            
-            <div class="cleaner h40"></div>
-            
-            <h5>Recent Posts</h5>
-            <div class="rp_pp">
-                <a href="#">Integer venenatis pharetra magna vitae ultrices</a>
-                <p>Feb 23, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
-            <div class="rp_pp">
-                <a href="#">Vestibulum quis nulla nunc, nec lobortis nunc.</a>
-                <p>Feb 16, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
-            <div class="rp_pp">
-                <a href="#">Pellentesque convallis tristique mauris.</a>
-                <p>Feb 10, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
-            
-            <div class="cleaner h40"></div>
-            
-            <h5>Popular Posts</h5>
-            <div class="rp_pp">
-                <a href="#">Id tempor odio faucibus et proin pharetra justo.</a>
-                <p>Feb 02, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
-            <div class="rp_pp">
-                <a href="#">Etiam Fringilla Sapien quis mauris  vestibulum.</a>
-                <p>June 03, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
-            <div class="rp_pp">
-                <a href="#">Sed ac arcu ipsum, ut suscipit neque. </a>
-                <p>August 08, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
-            
-            <div class="cleaner h40"></div>
-            
-        	<h5>Flickr Stream</h5>
-            <ul class="flickr_stream">
-                <li><a href="#"><img class="image_frame" src="images/tooplate_image_02.png" alt="" /></a></li>
-                <li><a href="#"><img class="image_frame" src="images/tooplate_image_03.png" alt="" /></a></li>
-                <li class="no_margin_right"><a href="#"><img class="image_frame" src="images/tooplate_image_04.png" alt="" /></a></li>
-                <li><a href="#"><img class="image_frame" src="images/tooplate_image_05.png" alt="" /></a></li>
-                <li><a href="#"><img class="image_frame" src="images/tooplate_image_06.png" alt="" /></a></li>
-                <li class="no_margin_right"><a href="#"><img class="image_frame" src="images/tooplate_image_07.png" alt="" /></a></li>
-            </ul>
-            
-        </div>        
-        
-       
+
         <div class="cleaner"></div>
 	</div> <!-- END of tooplate_main -->   
     
 </div> <!-- END of tooplate_wrapper -->
-
-<div id="tooplate_bottom_wrapper">
-	<div id="tooplate_bottom">
-    	<div class="col one_fourth">
-        	<h4>Categories</h4>
-            <ul class="footer_list">
-            	<li><a href="#">HTML CSS Layouts</a></li>
-                <li><a href="#">Website Templates</a></li>
-                <li><a href="#">Wordpress Themes</a></li>
-                <li><a href="#">Web Design Blog</a></li>
-                <li><a href="#">Art and Illustration</a></li>
-			</ul>
-        </div>
-        <div class="col one_fourth">
-        	<h4>Pages</h4>
-            <ul class="footer_list">
-            	<li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
-			</ul>
-        </div>
-        <div class="col one_fourth">
-        	<h4>Follow Us</h4>	
-            
-            <div class="footer_social_button">
-                <a href="#"><img src="images/facebook.png" alt="facebook" /></a>
-                <a href="#"><img src="images/flickr.png" alt="flickr" /></a>
-                <a href="#"><img src="images/twitter.png" alt="twitter" /></a>
-                <a href="#"><img src="images/youtube.png" alt="youtube" /></a>
-                <a href="#"><img src="images/feed.png" alt="rss" /></a>
-			</div>
-            
-        </div>
-        
-        <div class="col one_fourth no_margin_right">
-        	<h4>Twitter</h4>
-            <ul class="twitter_post">
-	            <li>Suspendisse at scelerisque urna. Aenean tincidunt massa in tellus varius ultricies. <a href="#">http://bit.ly/13IwZO</a></li>
-			</ul>
-        </div>
-        <div class="cleaner"></div>
-    </div> <!-- END of tooplate_bottom -->
-</div> <!-- END of tooplate_bottom_wrapper -->
 
 <div id="tooplate_footer_wrapper">
 	<div id="tooplate_footer">

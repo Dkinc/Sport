@@ -8,6 +8,7 @@ import com.example.model.db.NewsDAO;
 
 public class NewsManager {
 
+private int uniqeNewsId;
 private HashSet<News> allNews;
 public HashSet<String> categories;
 	
@@ -15,9 +16,13 @@ public HashSet<String> categories;
 	private static NewsManager instance;
 	
 	private NewsManager(){
+		uniqeNewsId = 0;
 		allNews = new HashSet<News>();
-		for(News m : NewsDAO.getInstance().getAllNews()){
-			allNews.add(m);
+		for(News n : NewsDAO.getInstance().getAllNews()){
+			if(n.getIdNews() > uniqeNewsId){
+				uniqeNewsId = n.getIdNews();
+			}
+			allNews.add(n);
 		}
 		categories = new HashSet<String>();
 		for(String s : NewsDAO.getInstance().getCategories()){
@@ -50,7 +55,7 @@ public HashSet<String> categories;
 	 * Accessible only for Admin (method addNews(...))
 	 */
 	public synchronized void makeNews(String title, String text, String category, String picturesURL, String videoURL){
-		News n = new News(title, text, category, picturesURL, videoURL, 0);
+		News n = new News(++uniqeNewsId,title, text, category, picturesURL, videoURL, 0);
 		allNews.add(n);
 		NewsDAO.getInstance().addNews(n);
 	}
@@ -64,7 +69,7 @@ public HashSet<String> categories;
 	}
 	
 	 public synchronized void makeNews(String title, String text, String category, String picturesURL) {
-		 News n = new News(title, text, category, picturesURL, 0);
+		 News n = new News(++uniqeNewsId, title, text, category, picturesURL, 0);
 			allNews.add(n);
 			NewsDAO.getInstance().addNews(n);
 			System.out.println("NEWS MADE");
@@ -91,6 +96,15 @@ public HashSet<String> categories;
 			}
 			return null;
     }
+	 
+	 public synchronized News getNewsByID(int id){
+			for (News news : allNews) {
+				if(news.getIdNews() == id){
+					return news;
+				}
+			}
+			return null;
+ }
 	 
 	 public synchronized HashSet<News> searchNewsByCategory(String category){
 		 HashSet<News> searchResult = new HashSet<News>();

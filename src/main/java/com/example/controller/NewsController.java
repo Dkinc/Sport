@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -44,8 +45,9 @@ public class NewsController {
 	public String addNews(@RequestParam("picturesurl") MultipartFile multiPartFile, Model model ,@ModelAttribute News n) {
 		if(NewsManager.getInstance().validateNews(n.getTitle(), n.getText(), n.getCategory(), multiPartFile)){
 			System.out.println("Validation Succsessful!");
-			File fileOnDisk = new File("images\\news\\" + multiPartFile.getOriginalFilename());
+			File fileOnDisk = new File("D:\\java\\workspace\\SpringDK\\MyProject Krasi\\src\\main\\webapp\\static\\images\\news\\" + multiPartFile.getOriginalFilename());
 			try {
+				fileOnDisk.createNewFile();
 				Files.copy(multiPartFile.getInputStream(), fileOnDisk.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {
 				System.out.println("ERROR UPLOADING FILE!!!");
@@ -57,11 +59,11 @@ public class NewsController {
 		return "addnews";
 	}
 	
-	@RequestMapping(value="/post", method=RequestMethod.GET)
-	public String getPost(HttpSession s, Model model,HttpServletRequest req) {
-		String title = (String) req.getAttribute("title");
-		News news = NewsManager.getInstance().getNewsByTitle(title);
+	@RequestMapping(value="/{idNews}", method=RequestMethod.GET)
+	public String getPostId(@PathVariable("idNews") int id, Model model,HttpServletResponse resp) {
+		News news = NewsManager.getInstance().getNewsByID(id);
 		model.addAttribute("news", news);
+		
 		return "post";
 	}
 	
