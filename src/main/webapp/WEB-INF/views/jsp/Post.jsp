@@ -74,8 +74,8 @@ ddsmoothmenu.init({
         	<div class="post">
             	
             <h2>${news.getTitle()}</h2>
-                    
-            <img src="${news.getPicturesURL()}" alt="" />   
+           
+            <img src= <c:url value="${news.getPicturesURL()}" /> alt="" />   
             <div class="meta">
                 <span class="admin">Admin</span><span class="tag"> ${news.getNumberOfReads()}</span><span class="comment"><a href="#">5 Comments</a></span>
                 <div class="cleaner"></div>

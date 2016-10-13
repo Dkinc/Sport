@@ -103,19 +103,18 @@ ddsmoothmenu.init({
 
             <c:forEach items="${football}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
-            <img src= <c:url value="${n.getPicturesURL()}" /> alt="" />
+            <img href="${n.getIdNews()}" src= <c:url value="${n.getPicturesURL()}" /> width="75" height="75" alt="" />
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
 			</c:forEach>
-            
         </div>
         
         <div class="newscol col half no_margin_right">
 	        <h2>Basketball</h2>
             <c:forEach items="${basketball}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
-            <img src="${n.getPicturesURL()}"></img>
+            <img href="${n.getIdNews()}" src= <c:url value="${n.getPicturesURL()}" /> width="75" height="75" alt="" />
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
@@ -126,7 +125,7 @@ ddsmoothmenu.init({
 	        <h2>Volleyball</h2>
             <c:forEach items="${volleyball}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
-            <img src="${n.getPicturesURL()}"></img>
+            <img href="${n.getIdNews()}" src= <c:url value="${n.getPicturesURL()}" /> width="75" height="75" alt="" />
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
@@ -137,7 +136,7 @@ ddsmoothmenu.init({
 	        <h2>Formula1</h2>
            <c:forEach items="${formula1}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
-            <img src="${n.getPicturesURL()}"></img>
+            <img href="${n.getIdNews()}" src= <c:url value="${n.getPicturesURL()}" /> width="75" height="75" alt="" />
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
