@@ -30,7 +30,8 @@ public class NewsDAO {
 			ResultSet resultSet = st.executeQuery("SELECT N.title, N.number_of_reads, N.picture_address, N.video_address, N.text, C.category FROM"
 					+ " news N INNER JOIN category_of_news C ON N.Category_of_news_idCategory_of_news = C.idCategory_of_news ORDER BY category Desc;");
 			while(resultSet.next()){
-				allNews.add(new News(	resultSet.getString("title"),
+				allNews.add(new News(	resultSet.getInt("idNews"),
+						                resultSet.getString("title"),
 										resultSet.getString("text"),
 										resultSet.getString("category"),
 										resultSet.getString("picture_address"),
