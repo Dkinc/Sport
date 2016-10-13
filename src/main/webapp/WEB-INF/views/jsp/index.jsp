@@ -70,14 +70,11 @@ ddsmoothmenu.init({
     </div> <!-- END of tooplate_header -->
     
     <div id="tooplate_main">
+    <!--  
 		<div id="slider-wrapper">
         
             <div id="slider" class="nivoSlider">
-			<!--  
-            <c:forEach items="${mainNews}" var="n" begin="0" end="4">
-            <a href=" " > <img src= "images/news/${n.getPicturesURL()}" alt="" title="${n.getTitle()}" /></a>
-			</c:forEach>
-            -->
+			
                 <img src="images/slider/toystory.jpg" alt="" />
                 <a href="http://dev7studios.com"><img src="images/slider/up.jpg" alt="" title="This is an example of a caption" /></a>
                 <img src="images/slider/walle.jpg" alt="" />
@@ -95,161 +92,64 @@ ddsmoothmenu.init({
             $('#slider').nivoSlider();
         });
         </script>
-        
+        -->
         
         
         <div class="cleaner h30"></div>
         
         <div class="newscol col half">
-	        <h2>Business</h2>
-            <div class="newsbox col one_fourth">
-            <a href="${news.getIdNews()}" > <img src= "${news.getPicturesURL()}" alt="" title="${news.getTitle()}" /></a>
-            <h6><a href="${news.getIdNews()}"  >${news.getTitle()} </a></h6>
-            <h6>${news.getPicturesURL()}</h6>
-           	  <div class="cleaner"></div>
-            </div>
+	        <h2>Football</h2>
+
+            <c:forEach items="${football}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
-            	<a href="${news.getIdNews()}" > <img src= "${news.getPicturesURL()}" alt="" title="${news.getTitle()}" /></a>
-            <h6><a href="${news.getIdNews()}"  >${news.getTitle()} </a></h6>
-            <h6>${news.getPicturesURL()}</h6>
+            <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
-            <div class="newsbox col one_fourth">
-            	<a href="fullpost.html"><img src="images/tooplate_image_03.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
-            <div class="newsbox col one_fourth no_margin_right">
-            	<a href="fullpost.html"><img src="images/tooplate_image_04.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
+			</c:forEach>
+            
         </div>
         
         <div class="newscol col half no_margin_right">
-	        <h2>Sport</h2>
-            <div class="newsbox col one_fourth">
-            	<a href="fullpost.html"><img src="images/tooplate_image_05.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
+	        <h2>Basketball</h2>
+            <c:forEach items="${basketball}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
-            	<a href="fullpost.html"><img src="images/tooplate_image_07.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
+            <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
-            <div class="newsbox col one_fourth">
-            	<a href="fullpost.html"><img src="images/tooplate_image_06.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
-            <div class="newsbox col one_fourth no_margin_right">
-            	<a href="fullpost.html"><img src="images/tooplate_image_08.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
+            </c:forEach>
         </div>
         
         <div class="newscol col half">
-	        <h2>Political</h2>
-            <div class="newsbox col one_fourth">
-            	<a href="fullpost.html"><img src="images/tooplate_image_10.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
+	        <h2>Volleyball</h2>
+            <c:forEach items="${volleyball}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
-            	<a href="fullpost.html"><img src="images/tooplate_image_09.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
+            <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
-            <div class="newsbox col one_fourth">
-            	<a href="fullpost.html"><img src="images/tooplate_image_11.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
-            <div class="newsbox col one_fourth no_margin_right">
-            	<a href="fullpost.html"><img src="images/tooplate_image_12.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
+            </c:forEach>
         </div>
         
         <div class="newscol col half no_margin_right">
-	        <h2>Technology</h2>
-            <div class="newsbox col one_fourth">
-            	<a href="fullpost.html"><img src="images/tooplate_image_13.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
+	        <h2>Formula1</h2>
+           <c:forEach items="${formula1}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
-            	<a href="fullpost.html"><img src="images/tooplate_image_14.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
+            <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
-            <div class="newsbox col one_fourth">
-            	<a href="fullpost.html"><img src="images/tooplate_image_15.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
-            <div class="newsbox col one_fourth no_margin_right">
-            	<a href="fullpost.html"><img src="images/tooplate_image_16.jpg" alt="image" /></a>
-                <h6><a href="fullpost.html">Lorem ipsum dolor sit </a></h6>
-              <p>Vestibulum at dolor arcu, nec convallis diam.</p>
-           	  <div class="cleaner"></div>
-            </div>
+            </c:forEach>
         </div>
 
 		<div class="cleaner"></div>
         
         <div class="col one_third">
         	<h5>Recent Posts</h5>
+        	<c:forEach items="${news}" var="n" begin="0" end="4">
             <div class="rp_pp">
-                <a href="fullpost.html">Integer venenatis pharetra magna vitae ultrices</a>
-                <p>Feb 23, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
+            <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
+           	  <div class="cleaner"></div>
             </div>
-            <div class="rp_pp">
-                <a href="fullpost.html">Vestibulum quis nulla nunc, nec lobortis nunc.</a>
-                <p>Feb 16, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
-            <div class="rp_pp">
-                <a href="fullpost.html">Pellentesque convallis tristique mauris.</a>
-                <p>Feb 10, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
-        </div>
-        
-        <div class="col one_third">
-        	<h5>Popular Posts</h5>
-            <div class="rp_pp">
-                <a href="fullpost.html">Id tempor odio faucibus et proin pharetra justo.</a>
-                <p>Feb 02, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
-            <div class="rp_pp">
-                <a href="fullpost.html">Etiam Fringilla Sapien quis mauris  vestibulum.</a>
-                <p>June 03, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
-            <div class="rp_pp">
-                <a href="fullpost.html">Sed ac arcu ipsum, ut suscipit neque. </a>
-                <p>August 08, 2048 - 20 Comments</p>
-                <div class="cleaner"></div>
-            </div>
+			</c:forEach>
+            
         </div>
         
        
