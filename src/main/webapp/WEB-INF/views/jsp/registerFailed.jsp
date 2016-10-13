@@ -99,12 +99,14 @@ ddsmoothmenu.init({
 			<div id="tooplate_menu" class="ddsmoothmenu">
 				<ul>
 					<li><a href="index" class="selected">Home</a></li>
-					<li><a href="about.html">About</a>
-						<ul>
-							<li><a href="#">Sub menu 1</a></li>
-							<li><a href="#">Sub menu 1</a></li>
-							<li><a href="#">Sub menu 1</a></li>
-						</ul></li>
+					<li><a href="">Categories</a>
+                    <ul>
+                        <li><a href="football">Football</a></li>
+                        <li><a href="basketball">Basketball</a></li>
+                        <li><a href="volleyball">Volleyball</a></li>
+                        <li><a href="formula1">Formula 1</a></li>
+                  </ul>
+                </li>
 					<c:if test="${sessionScope.loggedAs == null}">
 						<li><a href="register">Register</a></li>
 						<li><a href="login">Login</a></li>

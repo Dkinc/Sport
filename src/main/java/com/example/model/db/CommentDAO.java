@@ -29,20 +29,16 @@ public class CommentDAO {
 			HashSet<Comment> comments = new HashSet<Comment>();
 			try {
 				Statement st = DBManager.getInstance().getConnection().createStatement();
-				ResultSet resultSet = st.executeQuery("SELECT C.idComments, C.text, C.date_and_time, U.username, N.title"
+				ResultSet resultSet = st.executeQuery("SELECT C.text, C.date_and_time, U.username, N.title"
 						+ " FROM comments C JOIN users U ON C.Users_idUsers = U.idUsers"
 						+ "JOIN news N ON C.News_idNews = N.idNews"
 						+ " ORDER BY date_and_time Desc;");
 				while(resultSet.next()){
-					
-					Comment c = new Comment(	resultSet.getString("text"),
+					comments.add(new Comment(	resultSet.getString("text"),
 												resultSet.getTimestamp("date_and_time").toLocalDateTime(),
 												resultSet.getString("title"),
 												resultSet.getString("username")
-											);
-					
-					c.setIdComment(resultSet.getInt("idComments"));
-					comments.add(c);
+											));
 				}
 			} catch (SQLException e) {
 				System.out.println("cannot make statement in getAllComments!!!");
@@ -85,27 +81,5 @@ public class CommentDAO {
 				System.out.println("did not save the comment");
 				e.printStackTrace();
 			}		
-		}
-		
-		public void addChangeAfterLikeComment(Comment c){
-			try {
-				Statement st = DBManager.getInstance().getConnection().createStatement();			
-				st.executeUpdate("UPDATE comments SET number_of_likes = number_of_likes + 1 WHERE idComments =" + c.getIdComment());
-				System.out.println("Comment added successfully");
-			} catch (SQLException e) {
-				System.out.println("did not save the comment ");
-				e.printStackTrace();
-			}		
-		}
-		
-		public void addChangeAfterDislikeComment(Comment c){
-			try {
-				Statement st = DBManager.getInstance().getConnection().createStatement();			
-				st.executeUpdate("UPDATE comments SET number_of_dislikes = number_of_dislikes + 1 WHERE idComments =" + c.getIdComment());
-				System.out.println("Comment added successfully");
-			} catch (SQLException e) {
-				System.out.println("did not save the comment ");
-				e.printStackTrace();
-			}		
-		}
+		}	
 }

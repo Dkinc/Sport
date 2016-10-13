@@ -61,8 +61,15 @@ public HashSet<String> categories;
 	}
 	
 	public synchronized boolean validateNews(String title, String text, String category, MultipartFile mpf){
-		 if(title != null && title != "" && text !=null && text != "" && category != null && category != "" && !mpf.isEmpty()){
-			 return true;
+		 if(title != null && title != "" ){
+			if(text !=null && text != ""  ){
+				if(category != null && category != ""){
+					if(mpf != null && !mpf.isEmpty()){
+						return true;						
+					}
+				}
+					
+			}
 		 }
 		 return false;
 		

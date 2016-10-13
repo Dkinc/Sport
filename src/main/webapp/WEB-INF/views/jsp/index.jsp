@@ -46,11 +46,12 @@ ddsmoothmenu.init({
         <div id="tooplate_menu" class="ddsmoothmenu">
             <ul>
                 <li><a href="index" class="selected">Home</a></li>
-                <li><a href="about.html">About</a>
+                <li><a href="">Categories</a>
                     <ul>
-                        <li><a href="#">Sub menu 1</a></li>
-                        <li><a href="#">Sub menu 1</a></li>
-                        <li><a href="#">Sub menu 1</a></li>
+                        <li><a href="football">Football</a></li>
+                        <li><a href="basketball">Basketball</a></li>
+                        <li><a href="volleyball">Volleyball</a></li>
+                        <li><a href="formula1">Formula 1</a></li>
                   </ul>
                 </li>
                 <c:if test = "${sessionScope.loggedAs == null}">
@@ -102,6 +103,7 @@ ddsmoothmenu.init({
 
             <c:forEach items="${football}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
+            <img src= <c:url value="${n.getPicturesURL()}" /> alt="" />
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
@@ -113,6 +115,7 @@ ddsmoothmenu.init({
 	        <h2>Basketball</h2>
             <c:forEach items="${basketball}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
+            <img src="${n.getPicturesURL()}"></img>
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
@@ -123,6 +126,7 @@ ddsmoothmenu.init({
 	        <h2>Volleyball</h2>
             <c:forEach items="${volleyball}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
+            <img src="${n.getPicturesURL()}"></img>
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>
@@ -133,6 +137,7 @@ ddsmoothmenu.init({
 	        <h2>Formula1</h2>
            <c:forEach items="${formula1}" var="n" begin="0" end="4">
             <div class="newsbox col one_fourth no_margin_right">
+            <img src="${n.getPicturesURL()}"></img>
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
            	  <div class="cleaner"></div>
             </div>

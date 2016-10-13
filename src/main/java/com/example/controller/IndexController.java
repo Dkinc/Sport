@@ -28,7 +28,7 @@ import com.example.model.NewsManager;
 @MultipartConfig
 public class IndexController {
 	
-	private static final String FILE_LOCATION = "images\\news\\";
+	private static final String FILE_LOCATION = "img\\";
 	
 	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public String getIndex(HttpServletResponse resp, Model m) {

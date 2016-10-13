@@ -48,20 +48,12 @@ ddsmoothmenu.init({
         <div id="tooplate_menu" class="ddsmoothmenu">
             <ul>
                 <li><a href="index" class="selected">Home</a></li>
-                <li><a href="about.html">About</a>
+                 <li><a href="">Categories</a>
                     <ul>
-                        <li><a href="#">Sub menu 1</a></li>
-                        <li><a href="#">Sub menu 1</a></li>
-                        <li><a href="#">Sub menu 1</a></li>
-                  </ul>
-                </li>
-                <li><a href="portfolio.html">Portfolio</a>
-                    <ul>
-                        <li><a href="#">Sub menu 1</a></li>
-                        <li><a href="#">Sub menu 1</a></li>
-                        <li><a href="#">Sub menu 1</a></li>
-                        <li><a href="#">Sub menu 1</a></li>
-                        <li><a href="#">Sub menu 1</a></li>
+                        <li><a href="football">Football</a></li>
+                        <li><a href="basketball">Basketball</a></li>
+                        <li><a href="volleyball">Volleyball</a></li>
+                        <li><a href="formula1">Formula 1</a></li>
                   </ul>
                 </li>
                 <c:if test = "${sessionScope.loggedAs == null}">
@@ -85,7 +77,7 @@ ddsmoothmenu.init({
                     
             <img src="${news.getPicturesURL()}" alt="" />   
             <div class="meta">
-                <span class="admin">Admin</span><span class="date">March 03, 2048</span><span class="tag"> ${news.getNumberOfReads()}</span><span class="comment"><a href="#">5 Comments</a></span>
+                <span class="admin">Admin</span><span class="tag"> ${news.getNumberOfReads()}</span><span class="comment"><a href="#">5 Comments</a></span>
                 <div class="cleaner"></div>
             </div> 
             

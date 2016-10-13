@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,15 +29,16 @@ import com.example.model.NewsManager;
 @Controller
 public class NewsController {
 	
-	private static final String IMAGES_LOCATION = "images\\news\\";
+	private static final String IMAGES_LOCATION = "img/";
 
 	@RequestMapping(value="/addnews", method=RequestMethod.GET)
 	public String getAddNews(HttpSession s, Model model) {
-		model.addAttribute("news", new News());
-		Map refData = new HashMap();
-		model.addAttribute("categories" , NewsManager.getInstance().categories);
-		if(s.getAttribute("loggedAs").equals("admin")){
-			return "addnews";
+		if(s.getAttribute("loggedAs") != null ){
+			if(s.getAttribute("loggedAs").equals("admin")){		
+				model.addAttribute("news", new News());
+				model.addAttribute("categories" , NewsManager.getInstance().categories);
+				return "addnews";
+			}
 		}
 			s.invalidate();
 		return "login";
@@ -46,7 +48,7 @@ public class NewsController {
 	public String addNews(@RequestParam("picturesurl") MultipartFile multiPartFile, Model model ,@ModelAttribute News n) {
 		if(NewsManager.getInstance().validateNews(n.getTitle(), n.getText(), n.getCategory(), multiPartFile)){
 			System.out.println("Validation Succsessful!");
-			File fileOnDisk = new File(IMAGES_LOCATION + multiPartFile.getOriginalFilename());
+			File fileOnDisk = new File("D:\\java\\workspace\\SpringDK\\MyProject\\src\\main\\webapp\\static\\img\\" + multiPartFile.getOriginalFilename());
 			try {
 				fileOnDisk.createNewFile();
 				Files.copy(multiPartFile.getInputStream(), fileOnDisk.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -73,6 +75,39 @@ public class NewsController {
 //		}
 		return "post";
 	}
+	
+	@RequestMapping(value="/football", method=RequestMethod.GET)
+	public String getFootball(Model model) {
+		HashSet<News> footballNews = NewsManager.getInstance().searchNewsByCategory("Football");
+		model.addAttribute("news", footballNews);
+		model.addAttribute("category", "Football");
+		return "category";
+	}
+	
+	@RequestMapping(value="/basketball", method=RequestMethod.GET)
+	public String getBasketball(Model model) {
+		HashSet<News> basketballNews = NewsManager.getInstance().searchNewsByCategory("basketball");
+		model.addAttribute("news", basketballNews);
+		model.addAttribute("category", "Basketball");
+		return "category";
+	}
+	
+	@RequestMapping(value="/volleyball", method=RequestMethod.GET)
+	public String getVolleyball(Model model) {
+		HashSet<News> volleyballNews = NewsManager.getInstance().searchNewsByCategory("volleyball");
+		model.addAttribute("news", volleyballNews);
+		model.addAttribute("category", "Volleyball");
+		return "category";
+	}
+	
+	@RequestMapping(value="/formula1", method=RequestMethod.GET)
+	public String getFormula1(Model model) {
+		HashSet<News> formula1News = NewsManager.getInstance().searchNewsByCategory("formula1");
+		model.addAttribute("news", formula1News);
+		model.addAttribute("category", "Formula1");
+		return "category";
+	}
+
 
 	
 }
