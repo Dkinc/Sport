@@ -33,9 +33,16 @@ public class IndexController {
 	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public String getIndex(HttpServletResponse resp, Model m) {
 		HashSet<News> mainNews = NewsManager.getInstance().getMainNews();
-		for(News n : mainNews){
-		m.addAttribute("news", n);
-		}
+		m.addAttribute("news", mainNews);
+		HashSet<News> footballNews = NewsManager.getInstance().searchNewsByCategory("Football");
+		m.addAttribute("football",footballNews);
+		HashSet<News> basketballNews = NewsManager.getInstance().searchNewsByCategory("Basketball");
+		m.addAttribute("basketball",basketballNews);
+		HashSet<News> volleyballNews = NewsManager.getInstance().searchNewsByCategory("Volleyball");
+		m.addAttribute("volleyball",volleyballNews);
+		HashSet<News> f1News = NewsManager.getInstance().searchNewsByCategory("Formula1");
+		m.addAttribute("formula1",f1News);
+		
 //		for(News n : mainNews){
 //			File file = new File(n.getPicturesURL());
 //			try {
