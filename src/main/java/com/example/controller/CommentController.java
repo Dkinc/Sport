@@ -32,4 +32,16 @@ public class CommentController {
 		CommentManager.getInstance().makeComment(c.getText(), c.getDateAndTime(), c.getNewsTitle(), c.getUsername());
 		return "addcomment";
 	}
+	
+	@RequestMapping(value="/likecomment" , method=RequestMethod.POST)
+	public String likeComment( Model model, @ModelAttribute Comment c) {
+		CommentManager.getInstance().changeCommentAfterLike(c);
+		return "comments";// refresh after like
+	}
+	
+	@RequestMapping(value="/dislikecomment" , method=RequestMethod.POST)
+	public String dislikeComment( Model model, @ModelAttribute Comment c) {
+		CommentManager.getInstance().changeCommentAfterDislike(c);
+		return "comments";// refresh after dislike
+	}
 }

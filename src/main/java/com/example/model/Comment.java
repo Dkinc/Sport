@@ -4,7 +4,15 @@ import java.time.LocalDateTime;
 
 public class Comment {
 
-	
+	private int idComment;
+	public int getIdComment() {
+		return idComment;
+	}
+
+	public void setIdComment(int idComment) {
+		this.idComment = idComment;
+	}
+
 	private String text;
 	private LocalDateTime dateAndTime; 
 	private int likes = 0;
@@ -15,7 +23,7 @@ public class Comment {
 	public Comment(){}
 
 	public Comment(String text, LocalDateTime dateAndTime, String newsTitle, String username ) {
-		super();
+		
 		this.newsTitle = newsTitle;
 		this.username = username;
 		this.text = text;

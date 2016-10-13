@@ -32,4 +32,13 @@ private HashSet<Comment> allComments;
 		CommentDAO.getInstance().addComment(c);
 	}
 	
+	public synchronized void changeCommentAfterLike(Comment c){
+		c.likeComment();
+		CommentDAO.getInstance().addChangeAfterLikeComment(c);
+	}
+	
+	public synchronized void changeCommentAfterDislike(Comment c){
+		c.disLikeComment();
+		CommentDAO.getInstance().addChangeAfterDislikeComment(c);
+	}
 }
