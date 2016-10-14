@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.model.Comment;
 import com.example.model.News;
 import com.example.model.NewsManager;
 
@@ -37,6 +38,7 @@ public class NewsController {
 			if(s.getAttribute("loggedAs").equals("admin")){		
 				model.addAttribute("news", new News());
 				model.addAttribute("categories" , NewsManager.getInstance().categories);
+				model.addAttribute("comment", new Comment());
 				return "addnews";
 			}
 		}

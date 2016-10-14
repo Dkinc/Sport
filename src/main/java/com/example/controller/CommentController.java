@@ -17,15 +17,6 @@ import com.example.model.CommentManager;
 @Controller
 public class CommentController {
 
-	@RequestMapping(value="/addcomment", method=RequestMethod.GET)
-	public String getAddComment(HttpSession s, Model model) {
-		model.addAttribute("comment", new Comment());
-		if(s.getAttribute("loggedAs")!= null && !s.isNew()){
-			return "addcomment";
-		}
-			s.invalidate();
-		return "login";
-	}
 	
 	@RequestMapping(value="/addcomment" , method=RequestMethod.POST)
 	public String addComment( Model model, @ModelAttribute Comment c) {

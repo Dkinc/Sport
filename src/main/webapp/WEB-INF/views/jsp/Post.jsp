@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -85,166 +86,49 @@ ddsmoothmenu.init({
 </div>
         
            <div class="cleaner h40"></div>
+          
             <h4>Comments</h4>
                         
               	<div id="comment_section">
                 <ol class="comments first_level">
-                        
-                        <li>
-                            <div class="comment_box commentbox1">
-                                    
-                                <div class="gravatar">
-                                    <img class="image_frame" src="images/avator.png" alt="author 6" />
-                                </div>
-                                
-                                <div class="comment_text">
-                                    <div class="comment_author">Steven <span class="date">November 25, 2048</span> <span class="time">11:35 pm</span></div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dictum ornare nulla ac laoreet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dictum ornare nulla ac laoreet.</p>
-                                  <div class="reply"><a href="#">Reply</a></div>
-                                </div>
-                                <div class="cleaner"></div>
-                            </div>                        
-                            
-                        </li>
-                        
-                        <li>
-                        
-                        
-                            	<ol class="comments">
-                            
-                                    <li>
-                                        <div class="comment_box commentbox2">
-                                        
-                                        <div class="gravatar">
-                                            <img class="image_frame" src="images/avator.png" alt="author 6" />
-                                        </div>
-                                        <div class="comment_text">
-                                        <div class="comment_author">Richard <span class="date">November 27, 2048</span> <span class="time">10:20 pm</span></div>
-                                        <p>Nullam bibendum tempor est nec cursus. Sed at risus dui. Ut imperdiet libero at mauris vestibulum tempor.</p>
-                                        <div class="reply"><a href="#">Reply</a></div>
-                                        </div>
-                                        
-                                        <div class="cleaner"></div>
-                                        </div>                        
-                                    
-                                    
-                                    </li>
-                                    
-                                    <li>
-                                    
-                            
-                                        <ol class="comments">
-                                    
-                                            <li>
-                                                <div class="comment_box commentbox1">
-                                                
-                                                    <div class="gravatar">
-                                    <img class="image_frame" src="images/avator.png" alt="author 6" />
-                                </div>
-                                                    <div class="comment_text">
-                                                        <div class="comment_author">John <span class="date">November 28, 2048</span> <span class="time">11:42 am</span></div>
-                                                        <p> Vestibulum eget ligula et ipsum laoreet aliquam sed ut risus.  </p>
-                                                      <div class="reply"><a href="#">Reply</a></div>
-                                                    </div>
-                                                    
-                                                    <div class="cleaner"></div>
-                                                </div>                        
-                                                
-                                                
-                                            </li>
-                                    
-                                        </ol>
+                        <c:forEach items="${news.comments}" var="c" begin="0">
+	                        <li>
+	                            <div class="comment_box commentbox1">  
+	                                <div class="comment_text">
+	                                    <div class="comment_author">${c.getUsername()} <span class="date">${c.getDateAndTime()}</span> </div>
+	                                    <p>${c.getText()}</p>
+	                                </div>
+	                                <div class="cleaner"></div>
+	                            </div>                        
+	                            
+	                        </li>
+						</c:forEach>
+                  </ol>
 
-                        
-                        			</li>
-                                </ol>
-                                
-						</li>
-                        
-                        <li>
-                            <div class="comment_box commentbox1">
-                                    
-                                     
-                                <div class="gravatar">
-                                    <img class="image_frame" src="images/avator.png" alt="author 6" />
-                                </div>
-                                <div class="comment_text">
-                                    <div class="comment_author">Martin <span class="date">November 29, 2048</span> <span class="time">07:35 am</span></div>
-                                    <p> Integer semper sollicitudin quam a ornare. Nam venenatis nibh ac sem faucibus et imperdiet magna laoreet. Nulla sagittis elit in enim ullamcorper vitae tincidunt metus bibendum.</p>
-                                  <div class="reply"><a href="#">Reply</a></div>
-                                </div>
-                                
-                                <div class="cleaner"></div>
-                            </div>                        
-                            
-                            
-                        </li>
-                        
-                        <li>
-                            <div class="comment_box commentbox1">
-                                    
-                               <div class="gravatar">
-                                    <img class="image_frame" src="images/avator.png" alt="author 6" />
-                                </div>
-                                <div class="comment_text">
-                                    <div class="comment_author">David <span class="date">November 30, 2048</span> <span class="time">10:54 am</span></div>
-                                    <p> Maecenas id orci vitae lectus fermentum posuere. Quisque ut risus nibh. Etiam consequat elit eu nisi porta ac auctor nisl ultrices.</p>
-                                  <div class="reply"><a href="#">Reply</a></div>
-                                </div>
-                                
-                                <div class="cleaner"></div>
-                            </div>                        
-                            
-                            
-                        </li>
-                        
-                </ol>
-                <div class="cleaner h20"></div>    
-          		<div class="pagging">
-                    <ul>
-                         <li><a href="#" target="_parent">Previous</a></li>
-                    <li><a href="#" target="_parent">1</a></li>
-                    <li><a href="#" target="_parent">2</a></li>
-                    <li><a href="#" target="_parent">3</a></li>
-                    <li><a href="#" target="_parent">4</a></li>
-                    <li><a href="#" target="_parent">5</a></li>
-                    <li><a href="#" target="_parent">6</a></li>
-                    <li><a href="#" target="_parent">Next</a></li>
-                    </ul>
-                </div>    
-                    
-                </div>
-                
                 <div class="cleaner h20"></div>
-                
-                <div id="comment_form">
-                    <h4>Leave your comment</h4>
+	                <div id="comment_form">
+                <c:if test = "${sessionScope.loggedAs != null}">
+	                    <h4>Leave your comment</h4>
+	                    
+	                    <form:form action="addComment" method="post" commandName="comment">
+	                        
+	                        <div class="form_row">
+	                            <label>Your comment</label><br />
+	                            <form:textarea path="text" />
+	                        </div>
+	
+	                        <input type="submit" class="submit_btn" name="submit" id="submit" value="Comment" />
+	                    </form:form>
                     
-                    <form action="#" method="post">
-                        <div class="form_row">
-                            <label>Name (* required )</label>
-                            <br />
-                            <input type="text" name="name" class="txt_field" />
-
-                        </div>
-                        <div class="form_row">
-                            <label>Email  (* required but it will not be published )</label>
-                            <br />
-                            <input type="text" name="name" class="txt_field" />
-                        </div>
-                        <div class="form_row">
-                            <label>Your comment</label><br />
-                            <textarea  name="comment" rows="" cols=""></textarea>
-                        </div>
-
-                        <input type="submit" class="submit_btn" name="submit" id="submit" value="Send" />
-                    </form>
-                    
-                
+                </c:if>
+                <c:if test = "${sessionScope.loggedAs == null}">
+                <h4>Please Log in or Register to leave a comment</h4>
+                </c:if>
             	</div>
+            	
             <div class="cleaner"></div>
         </div>
-
+		</div>
         <div class="cleaner"></div>
 	</div> <!-- END of tooplate_main -->   
     
