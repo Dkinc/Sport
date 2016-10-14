@@ -1,4 +1,7 @@
 package com.example.model;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class News {
 	
@@ -7,6 +10,7 @@ public class News {
 	private String text;
 	private String category;
 //	private TreeSet<String> picturesURL;// picures for concrete news, #pictures = equal or more than 1 and less than 5 - complicated.More columns for pics in db .
+	private List<Comment> newsComments;
 	private String picturesURL;
 	private String videoURL;
 	private int numberOfReads;
@@ -18,6 +22,7 @@ public class News {
 		this.category = category;
 		this.picturesURL = picturesURL;
 		this.videoURL = videoURL;
+		this.newsComments = new ArrayList<Comment>();
 	}
 
 	public News(int idNews, String title, String text, String category, String picturesURL, int numberOfReads) {
@@ -27,6 +32,7 @@ public class News {
 		this.category = category;
 		this.picturesURL = picturesURL;
 		this.numberOfReads = numberOfReads;
+		this.newsComments = new ArrayList<Comment>();
 	}
 
 	public News() {
@@ -98,4 +104,7 @@ public class News {
 		this.idNews = idNews;
 	}
 
+	public List<Comment> getAllCommentsForNews(){
+		return  Collections.unmodifiableList (newsComments);
+	}
 }

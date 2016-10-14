@@ -87,25 +87,63 @@ public class CommentDAO {
 			}		
 		}
 		
-		public void addChangeAfterLikeComment(Comment c){
+		public void addChangeAfterLikeComment(int idComment){
 			try {
 				Statement st = DBManager.getInstance().getConnection().createStatement();			
-				st.executeUpdate("UPDATE comments SET number_of_likes = number_of_likes + 1 WHERE idComments =" + c.getIdComment());
-				System.out.println("Comment added successfully");
+				st.executeUpdate("UPDATE comments SET number_of_likes = number_of_likes + 1 WHERE idComments =" + idComment + ";");
+				System.out.println("Like of comment added successfully");
 			} catch (SQLException e) {
-				System.out.println("did not save the comment ");
+				System.out.println("did not save the like of comment ");
 				e.printStackTrace();
 			}		
 		}
 		
-		public void addChangeAfterDislikeComment(Comment c){
+		public void addChangeAfterDislikeComment(int idComment){
 			try {
 				Statement st = DBManager.getInstance().getConnection().createStatement();			
-				st.executeUpdate("UPDATE comments SET number_of_dislikes = number_of_dislikes + 1 WHERE idComments =" + c.getIdComment());
-				System.out.println("Comment added successfully");
+				st.executeUpdate("UPDATE comments SET number_of_dislikes = number_of_dislikes + 1 WHERE idComments =" + idComment + ";");
+				System.out.println("Dislike of comment added successfully");
 			} catch (SQLException e) {
-				System.out.println("did not save the comment ");
+				System.out.println("did not save the dislike of comment ");
 				e.printStackTrace();
 			}		
+		}
+
+		public void addUserLike(int idComment, String username) {
+			try {
+				PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO like_comments_by_user ( Comments_idComments,"
+						+ " users_that_like_comment) VALUES (?,?);");// ako e nuzhno mozhe da se naprawi query s 4 parametura// za sega ne e nuzhno
+			
+				
+				st.setInt(1, idComment);
+				st.setString(2, username);;
+				
+				
+				st.executeUpdate();
+				System.out.println("Comment added successfully");
+			} catch (SQLException e) {
+				System.out.println("did not save the comment");
+				e.printStackTrace();
+			}		
+			
+		}
+
+		public void addUserDislike(int idComment, String username) {
+			try {
+				PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO dislike_comments_by_user ( Comments_idComments,"
+						+ " users_that_dislike_comment) VALUES (?,?);");// su6toto ...
+			
+				
+				st.setInt(1, idComment);
+				st.setString(2, username);;
+				
+				
+				st.executeUpdate();
+				System.out.println("Comment added successfully");
+			} catch (SQLException e) {
+				System.out.println("did not save the comment");
+				e.printStackTrace();
+			}		
+			
 		}
 }

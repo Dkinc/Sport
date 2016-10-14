@@ -1,24 +1,20 @@
 package com.example.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Comment {
 
 	private int idComment;
-	public int getIdComment() {
-		return idComment;
-	}
-
-	public void setIdComment(int idComment) {
-		this.idComment = idComment;
-	}
-
 	private String text;
 	private LocalDateTime dateAndTime; 
 	private int likes = 0;
 	private int dislikes = 0;
 	private String newsTitle;
-	private String username; 
+	private String username; // username of user that  write the comment
+	private List<String> usernames;// username of users that likes/dislikes the comment
 
 	public Comment(){}
 
@@ -28,13 +24,18 @@ public class Comment {
 		this.username = username;
 		this.text = text;
 		this.dateAndTime = dateAndTime;
+		this.usernames = new ArrayList<String>();
+	}
+
+	public List<String> getUsernames() {
+		return Collections.unmodifiableList(usernames);
 	}
 
 	public void likeComment(){
 		this.likes++;
 	}
 	
-	public void disLikeComment(){
+	public void dislikeComment(){
 		this.dislikes++;
 	}
 	
@@ -97,4 +98,13 @@ public class Comment {
 			this.dislikes = dislikes;
 		}
 	}
+	
+	public int getIdComment() {
+		return idComment;
+	}
+
+	public void setIdComment(int idComment) {
+		this.idComment = idComment;
+	}
+
 }
