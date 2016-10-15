@@ -4,6 +4,7 @@ package com.example.controller;
 
 import java.time.LocalDateTime;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -24,21 +25,25 @@ public class CommentController {
 	
 	@RequestMapping(value="/addComment" , method=RequestMethod.POST)
 	public String addComment( Model model, @ModelAttribute Comment c, HttpSession s) {
-		System.out.println("TITLE = " + NewsManager.getInstance().getNewsByID(c.getIdNews()).getTitle());
 		CommentManager.getInstance().makeComment(c.getText(), LocalDateTime.now(), c.getIdNews(), s.getAttribute("loggedAs").toString());
 		News news = NewsManager.getInstance().getNewsByID(c.getIdNews());
-		return "//" + Integer.toString(news.getIdNews());
+		
+		return "redirect:/" + Integer.toString(news.getIdNews());
 	}
 	
 	@RequestMapping(value="/likeComment" , method=RequestMethod.POST)
-	public String likeComment( Model model, @ModelAttribute int idComment, HttpSession s) {// idComment is hidden field in spring-form 
-		CommentManager.getInstance().changeCommentAfterLike(idComment, s.getAttribute("loggedAs").toString());
-		return "comments";// refresh after like
+	public String likeComment(HttpServletRequest req, HttpSession s) {// idComment is hidden field in spring-form 
+		System.out.println("ID = " + req.getAttribute("id"));
+		int id = (int) req.getAttribute("id");
+		CommentManager.getInstance().changeCommentAfterLike(id, s.getAttribute("loggedAs").toString());
+		News news = NewsManager.getInstance().getNewsByID(CommentManager.getInstance().getCommentByID(id).getIdNews());
+		return "redirect:/" + Integer.toString(news.getIdNews());
 	}
 	
 	@RequestMapping(value="/dislikeComment" , method=RequestMethod.POST)
-	public String dislikeComment( Model model, @ModelAttribute int idComment, HttpSession s) {// also
-		CommentManager.getInstance().changeCommentAfterDislike(idComment, s.getAttribute("loggedAs").toString());
-		return "comments";// refresh after dislike
+	public String dislikeComment( Model model, @ModelAttribute int id, HttpSession s) {// also
+		CommentManager.getInstance().changeCommentAfterDislike(id, s.getAttribute("loggedAs").toString());
+		News news = NewsManager.getInstance().getNewsByID(CommentManager.getInstance().getCommentByID(id).getIdNews());
+		return "redirect:/" + Integer.toString(news.getIdNews());
 	}
 }

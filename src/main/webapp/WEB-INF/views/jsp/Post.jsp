@@ -76,7 +76,7 @@ ddsmoothmenu.init({
             	
             <h2>${news.getTitle()}</h2>
            
-            <img src= <c:url value="${news.getPicturesURL()}" /> alt="" />   
+            <img src= <c:url value="${news.getPicturesURL()}" /> alt="" width="500" />   
             <div class="meta">
                 <span class="admin">Admin</span><span class="tag"> ${news.getNumberOfReads()}</span><span class="comment"><a href="#">5 Comments</a></span>
                 <div class="cleaner"></div>
@@ -97,6 +97,18 @@ ddsmoothmenu.init({
 	                                <div class="comment_text">
 	                                    <div class="comment_author">${c.getUsername()} <span class="date">${c.getDateAndTime()}</span> </div>
 	                                    <p>${c.getText()}</p>
+	                                    <p>Likes : ${c.getLikes()}</p>
+	                                    <p>Dislikes : ${c.getDislikes()}</p>
+	                                    <div>
+		                                    <form action="likeComment" method="post">
+													<input type="hidden" name="id" value ="${c.getIdComment()}"/>
+											<input type="submit" class="submit_btn" name="submit" id="submit" value="Like" />
+											</form>
+											<form action="dislikeComment" method="post">
+												    <input type="hidden" name="id" value = "${c.getIdComment()}"/>
+												    <input type="submit" class="submit_btn" name="submit" id="submit" value="Dislike" />
+											</form>
+										</div>
 	                                </div>
 	                                <div class="cleaner"></div>
 	                            </div>                        
@@ -115,7 +127,7 @@ ddsmoothmenu.init({
 	                        <div class="form_row">
 	                            <label>Your comment</label><br />
 	                            <form:textarea path="text" />
-	                            <form:hidden path="newsTitle" value = "${news.getTitle()}" />
+	                            <form:hidden path="idNews" value = "${news.getIdNews()}" />
 	                        </div>
 	
 	                        <input type="submit" class="submit_btn" name="submit" id="submit" value="Comment" />

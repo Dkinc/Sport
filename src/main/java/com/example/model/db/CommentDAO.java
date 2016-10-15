@@ -34,13 +34,12 @@ public class CommentDAO {
 						+ " ORDER BY date_and_time Desc;");
 				while(resultSet.next()){
 					
-					Comment c = new Comment(	resultSet.getString("text"),
+					Comment c = new Comment(	resultSet.getInt("idComments"),
+												resultSet.getString("text"),
 												resultSet.getTimestamp("date_and_time").toLocalDateTime(),
 												resultSet.getInt("idNews"),
 												resultSet.getString("username")
 											);
-					
-					c.setIdComment(resultSet.getInt("idComments"));
 					comments.add(c);
 				}
 			} catch (SQLException e) {

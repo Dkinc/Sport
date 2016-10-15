@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.User;
 import com.example.model.UsersManager;
@@ -59,16 +60,17 @@ public class UserController {
 	public String loginF(@ModelAttribute User u , HttpSession s) {
 		if(UsersManager.getInstance().validLogin(u.getUsername().toLowerCase(), u.getPassword())){
 			s.setAttribute("loggedAs", u.getUsername());
-			return "index";
+			
+			return "redirect:index";
 		}
 		return "loginFailed";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@ModelAttribute User u , HttpSession s) {
+	public String login(@ModelAttribute User u , HttpSession s ) {
 		if(UsersManager.getInstance().validLogin(u.getUsername().toLowerCase(), u.getPassword())){
 			s.setAttribute("loggedAs", u.getUsername());
-			return "index";
+			return "redirect:index";
 		}
 		return "loginFailed";
 	}
@@ -76,7 +78,7 @@ public class UserController {
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession s) {
 		s.invalidate();
-		return "index";
+		return "redirect:index";
 	}
 	
 	@RequestMapping(value="/profile", method=RequestMethod.GET)

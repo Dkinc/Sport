@@ -44,13 +44,23 @@ http://www.tooplate.com/view/2060-newspaper
 <script type="text/javascript">
 	function validation() {
 		var title = document.addNews.title.value;
+		var file = document.addNews.picturesurl.value;
 		if (title == "") {
 			alert("Fill the fields!");
 			title.focus();
 			return false;
-		} else {
-			return true;
+		} 
+		if (file=="" ) {
+			alert("No picture selected!");
+			file.focus();
+			return false;
 		}
+		if(!/(\.bmp|\.gif|\.jpg|\.jpeg)$/i.test(fld.value)) {
+	        alert("Invalid image file type.");
+	        file.focus();        
+	        return false;   
+	    } 
+		return true;
 	}
 </script>
 

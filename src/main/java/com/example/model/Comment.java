@@ -10,21 +10,23 @@ public class Comment {
 	private int idComment;
 	private String text;
 	private LocalDateTime dateAndTime; 
-	private int likes = 0;
-	private int dislikes = 0;
+	private int likes;
+	private int dislikes;
 	private int idNews;
 	private String username; // username of user that  write the comment
 	private List<String> usernames;// username of users that likes/dislikes the comment
 
 	public Comment(){}
 
-	public Comment(String text, LocalDateTime dateAndTime, int idNews, String username ) {
+	public Comment(int id, String text, LocalDateTime dateAndTime, int idNews, String username ) {
 		
-		this.idNews = idNews;
+		this.setIdNews(idNews);
 		this.username = username;
 		this.text = text;
 		this.dateAndTime = dateAndTime;
 		this.usernames = new ArrayList<String>();
+		this.likes = 0;
+		this.dislikes = 0;
 	}
 
 	public List<String> getUsernames() {
@@ -41,16 +43,6 @@ public class Comment {
 	
 	public void dislikeComment(){
 		this.dislikes++;
-	}
-	
-	
-
-	public int getIdNews() {
-		return idNews;
-	}
-
-	public void setIdNews(int idNews) {
-		this.idNews = idNews;
 	}
 
 	public String getUsername() {
@@ -109,6 +101,14 @@ public class Comment {
 
 	public void setIdComment(int idComment) {
 		this.idComment = idComment;
+	}
+
+	public int getIdNews() {
+		return idNews;
+	}
+
+	public void setIdNews(int idNews) {
+		this.idNews = idNews;
 	}
 
 }

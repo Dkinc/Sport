@@ -7,6 +7,7 @@ import com.example.model.db.CommentDAO;
 
 public class CommentManager {
 
+private static int uniqeCommentId = 0;
 private HashSet<Comment> allComments;
 	
 	
@@ -16,6 +17,9 @@ private HashSet<Comment> allComments;
 		allComments = new HashSet<Comment>();
 		for(Comment c : CommentDAO.getInstance().getAllComments()){
 			allComments.add(c);
+			if(c.getIdComment() > uniqeCommentId){
+				uniqeCommentId = c.getIdComment();
+			}
 		}
 	}
 	
@@ -27,7 +31,7 @@ private HashSet<Comment> allComments;
 	}
 	
 	public synchronized void makeComment(String text, LocalDateTime dateAndTime, int idNews, String username){
-		Comment c = new Comment(text, dateAndTime, idNews, username);
+		Comment c = new Comment(++uniqeCommentId ,text, dateAndTime, idNews, username);
 		CommentDAO.getInstance().addComment(c); // c has setter for idComment !!! And push in allComments with id!!
 		allComments.add(c);
 		NewsManager.getInstance().getNewsByID(idNews).addComment(c);// push in list of all comments for the news
@@ -63,4 +67,13 @@ private HashSet<Comment> allComments;
 		CommentDAO.getInstance().addChangeAfterDislikeComment(idComment);
 		CommentDAO.getInstance().addUserDislike(idComment, username);
 	}
+	
+	 public synchronized Comment getCommentByID(int id){
+			for (Comment c : allComments) {
+				if(c.getIdComment() == id){
+					return c;
+				}
+			}
+			return null;
+}
 }
