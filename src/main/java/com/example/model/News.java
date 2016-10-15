@@ -103,6 +103,7 @@ public class News {
 	}
 
 	public List<Comment> getAllCommentsForNews(){
+		NewsManager.getInstance().loadAllCommentsForNews(this);
 		return  Collections.unmodifiableList (comments);
 	}
 }

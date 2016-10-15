@@ -121,4 +121,12 @@ public HashSet<String> categories;
 			}
 			return searchResult;
     }
+	
+	public void loadAllCommentsForNews(News news){
+			for (Comment c :CommentDAO.getInstance().getAllComments()) {
+				if(c.getNewsTitle().equals(news.getTitle())){
+					news.addComment(c);
+				}
+			}
+		}
 }
