@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -38,7 +39,6 @@ public class NewsController {
 			if(s.getAttribute("loggedAs").equals("admin")){		
 				model.addAttribute("news", new News());
 				model.addAttribute("categories" , NewsManager.getInstance().categories);
-				model.addAttribute("comment", new Comment());
 				return "addnews";
 			}
 		}
@@ -67,7 +67,13 @@ public class NewsController {
 	@RequestMapping(value="/{idNews}", method=RequestMethod.GET)
 	public String getPostId(@PathVariable("idNews") int id, Model model,HttpServletResponse resp) {
 		News news = NewsManager.getInstance().getNewsByID(id);
+		ArrayList<Comment> comments = new ArrayList<Comment>();
+		for(Comment c :news.getAllCommentsForNews() ){
+			comments.add(c);
+		}
 		model.addAttribute("news", news);
+		model.addAttribute("comment", new Comment());
+		model.addAttribute("comments", comments);
 //		File pic = new File(news.getPicturesURL());
 //		try {
 //			Files.copy(pic.toPath(), resp.getOutputStream());

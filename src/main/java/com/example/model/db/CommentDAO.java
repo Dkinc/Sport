@@ -55,7 +55,7 @@ public class CommentDAO {
 		public void addComment(Comment c){
 			try {
 				PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO comments ( text,"
-						+ " date_and_time, title, username, number_of_likes, number_of_dislikes) VALUES (?,?,?,?,?,?,?);");
+						+ " date_and_time, title, username, number_of_likes, number_of_dislikes) VALUES (?,?,?,?,?,?);");
 				
 				Calendar cal = Calendar.getInstance();
 				

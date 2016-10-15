@@ -91,7 +91,7 @@ ddsmoothmenu.init({
                         
               	<div id="comment_section">
                 <ol class="comments first_level">
-                        <c:forEach items="${news.comments}" var="c" begin="0">
+                        <c:forEach items="${comments}" var="c" begin="0">
 	                        <li>
 	                            <div class="comment_box commentbox1">  
 	                                <div class="comment_text">
@@ -115,6 +115,7 @@ ddsmoothmenu.init({
 	                        <div class="form_row">
 	                            <label>Your comment</label><br />
 	                            <form:textarea path="text" />
+	                            <form:hidden path="newsTitle" value = "${news.getTitle()}" />
 	                        </div>
 	
 	                        <input type="submit" class="submit_btn" name="submit" id="submit" value="Comment" />
