@@ -101,11 +101,11 @@ ddsmoothmenu.init({
 	                                    <p>Dislikes : ${c.getDislikes()}</p>
 	                                    <div>
 		                                    <form action="likeComment" method="post">
-													<input type="hidden" name="id" value ="${c.getIdComment()}"/>
-											<input type="submit" class="submit_btn" name="submit" id="submit" value="Like" />
+													<input type="hidden" name="ID" value ="${c.getIdComment()}"/>
+													<input type="submit" class="submit_btn" name="submit" id="submit" value="Like" />
 											</form>
 											<form action="dislikeComment" method="post">
-												    <input type="hidden" name="id" value = "${c.getIdComment()}"/>
+												    <input type="hidden" name="ID" value = "${c.getIdComment()}"/>
 												    <input type="submit" class="submit_btn" name="submit" id="submit" value="Dislike" />
 											</form>
 										</div>

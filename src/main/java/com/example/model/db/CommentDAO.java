@@ -37,7 +37,7 @@ public class CommentDAO {
 					Comment c = new Comment(	resultSet.getInt("idComments"),
 												resultSet.getString("text"),
 												resultSet.getTimestamp("date_and_time").toLocalDateTime(),
-												resultSet.getInt("idNews"),
+												resultSet.getInt("News_idNews"),
 												resultSet.getString("username")
 											);
 					comments.add(c);

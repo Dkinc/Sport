@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.model.Comment;
 import com.example.model.CommentManager;
@@ -32,17 +32,15 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value="/likeComment" , method=RequestMethod.POST)
-	public String likeComment(HttpServletRequest req, HttpSession s) {// idComment is hidden field in spring-form 
-		System.out.println("ID = " + req.getAttribute("id"));
-		int id = (int) req.getAttribute("id");
+	public String likeComment(@RequestParam("ID") int id, HttpSession s) {// idComment is hidden field in spring-form 
 		CommentManager.getInstance().changeCommentAfterLike(id, s.getAttribute("loggedAs").toString());
 		News news = NewsManager.getInstance().getNewsByID(CommentManager.getInstance().getCommentByID(id).getIdNews());
 		return "redirect:/" + Integer.toString(news.getIdNews());
 	}
 	
 	@RequestMapping(value="/dislikeComment" , method=RequestMethod.POST)
-	public String dislikeComment( Model model, @ModelAttribute int id, HttpSession s) {// also
-		CommentManager.getInstance().changeCommentAfterDislike(id, s.getAttribute("loggedAs").toString());
+	public String dislikeComment( @RequestParam("ID") int id, HttpSession s) {// also
+		CommentManager.getInstance().changeCommentAfterLike(id, s.getAttribute("loggedAs").toString());
 		News news = NewsManager.getInstance().getNewsByID(CommentManager.getInstance().getCommentByID(id).getIdNews());
 		return "redirect:/" + Integer.toString(news.getIdNews());
 	}
