@@ -22,9 +22,10 @@ public class User {
 	private String password;
 	@Email
 	private String email;
-	private String profilePic;// url --> profile pic
-	
-	
+	private String profilePic;
+	private int idUser;
+
+
 	public User(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
@@ -38,9 +39,20 @@ public class User {
 		return false;
 	}
 	
+	
+	
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
+	
 
 	public String getEmail() {
 		return email;

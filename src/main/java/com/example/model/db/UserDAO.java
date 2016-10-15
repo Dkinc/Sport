@@ -28,12 +28,14 @@ private static UserDAO instance;
 		Set<User> users = new HashSet<User>();
 		try {
 			Statement st = DBManager.getInstance().getConnection().createStatement();
-			ResultSet resultSet = st.executeQuery("SELECT username, password, email FROM users;");
+			ResultSet resultSet = st.executeQuery("SELECT idUsers, username, password, email FROM users;");
 			while(resultSet.next()){
-				users.add(new User(	resultSet.getString("username"),
+				User u = new User(	resultSet.getString("username"),
 									resultSet.getString("password"),
 									resultSet.getString("email")
-									));
+									);
+				u.setIdUser(resultSet.getInt("idUsers"));
+				users.add(u);
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL exception!!! Users not load!");
@@ -52,6 +54,14 @@ private static UserDAO instance;
 			st.setString(2, user.getPassword());
 			st.setString(3, user.getEmail());
 			st.executeUpdate();
+			System.out.println("User added in db");
+			// tuk setvame idUser na user!!!
+			ResultSet rs = st.getGeneratedKeys();
+			if(rs.next())
+            {
+                int last_inserted_id = rs.getInt(1);
+                user.setIdUser(last_inserted_id);
+            }
 			System.out.println("User added successfully");
 		} catch (SQLException e) {
 			System.out.println("SQL exception. Did not save the user!!!");

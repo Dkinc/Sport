@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 
 import com.example.model.Comment;
+import com.example.model.UsersManager;
 
 public class CommentDAO {
 
@@ -54,14 +55,14 @@ public class CommentDAO {
 		public void addComment(Comment c){
 			try {
 				PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO comments ( text,"
-						+ " date_and_time, title, username, number_of_likes, number_of_dislikes) VALUES (?,?,?,?,?,?);");
+						+ " date_and_time, News_idNews, Users_idUsers, number_of_likes, number_of_dislikes) VALUES (?,?,?,?,?,?);");
 				
 				Calendar cal = Calendar.getInstance();
 				
 				st.setString(1, c.getText());
 				st.setDate(2, new java.sql.Date(cal.getTimeInMillis()));
 				st.setInt(3, c.getIdNews());
-				st.setString(4, c.getUsername());
+				st.setInt(4, UsersManager.getInstance().getUser(c.getUsername()).getIdUser());
 				st.setInt(5, c.getLikes());
 				st.setInt(6, c.getDislikes());
 				
