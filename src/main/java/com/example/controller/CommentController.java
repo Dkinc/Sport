@@ -24,9 +24,9 @@ public class CommentController {
 	
 	@RequestMapping(value="/addComment" , method=RequestMethod.POST)
 	public String addComment( Model model, @ModelAttribute Comment c, HttpSession s) {
-		System.out.println("TITLE = " + c.getNewsTitle());
-		CommentManager.getInstance().makeComment(c.getText(), LocalDateTime.now(), c.getNewsTitle(), s.getAttribute("loggedAs").toString());
-		News news = NewsManager.getInstance().getNewsByTitle(c.getNewsTitle());
+		System.out.println("TITLE = " + NewsManager.getInstance().getNewsByID(c.getIdNews()).getTitle());
+		CommentManager.getInstance().makeComment(c.getText(), LocalDateTime.now(), c.getIdNews(), s.getAttribute("loggedAs").toString());
+		News news = NewsManager.getInstance().getNewsByID(c.getIdNews());
 		return "//" + Integer.toString(news.getIdNews());
 	}
 	

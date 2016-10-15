@@ -1,8 +1,11 @@
 package com.example.model;
 
 import java.util.HashSet;
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.model.db.CommentDAO;
 import com.example.model.db.NewsDAO;
 
 public class NewsManager {
@@ -121,10 +124,10 @@ public HashSet<String> categories;
 			}
 			return searchResult;
     }
-	
-	public void loadAllCommentsForNews(News news){
+	 
+		public void loadAllCommentsForNews(News news){
 			for (Comment c :CommentDAO.getInstance().getAllComments()) {
-				if(c.getNewsTitle().equals(news.getTitle())){
+				if(c.getIdNews() == news.getIdNews()){
 					news.addComment(c);
 				}
 			}

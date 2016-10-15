@@ -12,15 +12,15 @@ public class Comment {
 	private LocalDateTime dateAndTime; 
 	private int likes = 0;
 	private int dislikes = 0;
-	private String newsTitle;
+	private int idNews;
 	private String username; // username of user that  write the comment
 	private List<String> usernames;// username of users that likes/dislikes the comment
 
 	public Comment(){}
 
-	public Comment(String text, LocalDateTime dateAndTime, String newsTitle, String username ) {
+	public Comment(String text, LocalDateTime dateAndTime, int idNews, String username ) {
 		
-		this.newsTitle = newsTitle;
+		this.idNews = idNews;
 		this.username = username;
 		this.text = text;
 		this.dateAndTime = dateAndTime;
@@ -43,14 +43,14 @@ public class Comment {
 		this.dislikes++;
 	}
 	
-	public String getNewsTitle() {
-		return newsTitle;
+	
+
+	public int getIdNews() {
+		return idNews;
 	}
 
-	public void setNewsTitle(String newsTitle) {
-		if(newsTitle != null && newsTitle != ""){
-			this.newsTitle = newsTitle;
-		}
+	public void setIdNews(int idNews) {
+		this.idNews = idNews;
 	}
 
 	public String getUsername() {

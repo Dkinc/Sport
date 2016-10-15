@@ -28,7 +28,7 @@ public class CommentDAO {
 			HashSet<Comment> comments = new HashSet<Comment>();
 			try {
 				Statement st = DBManager.getInstance().getConnection().createStatement();
-				ResultSet resultSet = st.executeQuery("SELECT C.idComments, C.text, C.date_and_time, U.username, N.title"
+				ResultSet resultSet = st.executeQuery("SELECT C.idComments, C.text, C.date_and_time, U.username, N.idNews"
 						+ " FROM comments C JOIN users U ON C.Users_idUsers = U.idUsers"
 						+ "JOIN news N ON C.News_idNews = N.idNews"
 						+ " ORDER BY date_and_time Desc;");
@@ -36,7 +36,7 @@ public class CommentDAO {
 					
 					Comment c = new Comment(	resultSet.getString("text"),
 												resultSet.getTimestamp("date_and_time").toLocalDateTime(),
-												resultSet.getString("title"),
+												resultSet.getInt("idNews"),
 												resultSet.getString("username")
 											);
 					
@@ -61,7 +61,7 @@ public class CommentDAO {
 				
 				st.setString(1, c.getText());
 				st.setDate(2, new java.sql.Date(cal.getTimeInMillis()));
-				st.setString(3, c.getNewsTitle());
+				st.setInt(3, c.getIdNews());
 				st.setString(4, c.getUsername());
 				st.setInt(5, c.getLikes());
 				st.setInt(6, c.getDislikes());

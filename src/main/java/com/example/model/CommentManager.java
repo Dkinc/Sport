@@ -26,11 +26,11 @@ private HashSet<Comment> allComments;
 		return instance;
 	}
 	
-	public synchronized void makeComment(String text, LocalDateTime dateAndTime, String newsTitle, String username){
-		Comment c = new Comment(text, dateAndTime, newsTitle, username);
+	public synchronized void makeComment(String text, LocalDateTime dateAndTime, int idNews, String username){
+		Comment c = new Comment(text, dateAndTime, idNews, username);
 		CommentDAO.getInstance().addComment(c); // c has setter for idComment !!! And push in allComments with id!!
 		allComments.add(c);
-		NewsManager.getInstance().getNewsByTitle(newsTitle).addComment(c);// push in list of all comments for the news
+		NewsManager.getInstance().getNewsByID(idNews).addComment(c);// push in list of all comments for the news
 		
 	}
 	
