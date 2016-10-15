@@ -90,18 +90,16 @@ public class News {
 		return picturesURL;
 	}
 
-	public void setPicturesURL(String picturesURL) {
-//		if(new Admin().isValidImageURL(picturesURL)){
-//			this.picturesURL = picturesURL;
-//		}
-	}
-
 	public int getIdNews() {
 		return idNews;
 	}
 
 	public void setIdNews(int idNews) {
 		this.idNews = idNews;
+	}
+    
+	public void addComment(Comment c){
+		this.comments.add(c);
 	}
 
 	public List<Comment> getAllCommentsForNews(){

@@ -28,9 +28,10 @@ private HashSet<Comment> allComments;
 	
 	public synchronized void makeComment(String text, LocalDateTime dateAndTime, String newsTitle, String username){
 		Comment c = new Comment(text, dateAndTime, newsTitle, username);
+		CommentDAO.getInstance().addComment(c); // c has setter for idComment !!! And push in allComments with id!!
 		allComments.add(c);
-		CommentDAO.getInstance().addComment(c);
-		NewsManager.getInstance().getNewsByTitle(newsTitle).getAllCommentsForNews().add(c);
+		NewsManager.getInstance().getNewsByTitle(newsTitle).addComment(c);// push in list of all comments for the news
+		
 	}
 	
 	public synchronized void changeCommentAfterLike(int idComment, String username){
@@ -40,7 +41,7 @@ private HashSet<Comment> allComments;
 				if(c.getUsernames().contains(username)){
 					return;
 				}
-				c.getUsernames().add(username);
+				c.addUsername(username);
 				c.likeComment();
 			}
 		}
@@ -55,7 +56,7 @@ private HashSet<Comment> allComments;
 				if(c.getUsernames().contains(username)){
 					return;
 				}
-				c.getUsernames().add(username);
+				c.addUsername(username);
 				c.dislikeComment();
 			}
 		}

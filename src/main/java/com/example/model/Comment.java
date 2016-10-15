@@ -30,6 +30,10 @@ public class Comment {
 	public List<String> getUsernames() {
 		return Collections.unmodifiableList(usernames);
 	}
+	
+	public void addUsername(String username){
+		usernames.add(username);
+	}
 
 	public void likeComment(){
 		this.likes++;

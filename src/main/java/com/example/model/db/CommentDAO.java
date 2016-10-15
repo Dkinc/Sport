@@ -8,7 +8,6 @@ import java.util.Calendar;
 import java.util.HashSet;
 
 import com.example.model.Comment;
-import com.example.model.News;
 
 public class CommentDAO {
 
@@ -52,18 +51,6 @@ public class CommentDAO {
 			return comments;
 		}
 		
-		/*
-		 * Vsichki komentari za konkretna novina .Naredbata e po wreme na publikuwane.
-		 */
-		public HashSet<Comment> getAllCommentsForNews(News news){
-			HashSet<Comment> comments = new HashSet<Comment>();
-			for (Comment c : instance.getAllComments()) {
-				if(c.getNewsTitle().equals(news.getTitle())){
-					comments.add(c);
-				}
-			}
-			return comments;
-		}
 		
 		public void addComment(Comment c){
 			try {
@@ -80,6 +67,14 @@ public class CommentDAO {
 				st.setInt(6, c.getDislikes());
 				
 				st.executeUpdate();
+				System.out.println("Comment added in db");
+				// kak da vzema idComment na dobaveniq komentar!!!
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next())
+	            {
+	                int last_inserted_id = rs.getInt(1);
+	                c.setIdComment(last_inserted_id);
+	            }
 				System.out.println("Comment added successfully");
 			} catch (SQLException e) {
 				System.out.println("did not save the comment");

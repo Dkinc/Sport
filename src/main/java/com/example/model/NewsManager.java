@@ -1,7 +1,6 @@
 package com.example.model;
 
 import java.util.HashSet;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.model.db.NewsDAO;
@@ -122,6 +121,4 @@ public HashSet<String> categories;
 			}
 			return searchResult;
     }
-
-
 }
