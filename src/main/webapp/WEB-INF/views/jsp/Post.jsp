@@ -34,7 +34,17 @@ ddsmoothmenu.init({
 })
 
 </script> 
-
+<script type = "text/javascript">
+function validate() {
+	var text = document.comments.text.value;
+	if (text=="") {
+		alert("Can't add empty comments!");
+		text.focus();
+		return false;
+	}
+	return true;
+}
+</script>
 
 </head>
 
@@ -78,7 +88,7 @@ ddsmoothmenu.init({
            
             <img src= <c:url value="${news.getPicturesURL()}" /> alt="" width="500" />   
             <div class="meta">
-                <span class="admin">Admin</span><span class="tag"> ${news.getNumberOfReads()}</span><span class="comment"><a href="#">5 Comments</a></span>
+                <span class="admin">Admin</span><span class="tag"> ${news.getNumberOfReads()}</span>
                 <div class="cleaner"></div>
             </div> 
             
@@ -122,7 +132,7 @@ ddsmoothmenu.init({
                 <c:if test = "${sessionScope.loggedAs != null}">
 	                    <h4>Leave your comment</h4>
 	                    
-	                    <form:form action="addComment" method="post" commandName="comment">
+	                    <form:form action="addComment" name = "comments" onsubmit = "return validate()" method="post" commandName="comment">
 	                        
 	                        <div class="form_row">
 	                            <label>Your comment</label><br />

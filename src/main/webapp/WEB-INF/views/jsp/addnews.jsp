@@ -136,6 +136,9 @@ http://www.tooplate.com/view/2060-newspaper
 								value="Add News" /></td>
 						</tr>
 					</table>
+					<c:if test="${SUCCESS_MESSAGE != null}">
+ 	 					<div id="status_message">${SUCCESS_MESSAGE}</div>
+					</c:if>
 				</form:form>
 			</div>
 

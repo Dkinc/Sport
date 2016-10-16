@@ -41,7 +41,7 @@ ddsmoothmenu.init({
 	
     <div id="tooplate_header">
        <a href="index" id="branding"> <img src="images/logo.png"
-					alt="" class="logo"> </img> </a>
+					alt="" width="42" height="36" class="logo"> </img> </a>
 					
         <div id="tooplate_menu" class="ddsmoothmenu">
             <ul>
@@ -71,19 +71,15 @@ ddsmoothmenu.init({
     </div> <!-- END of tooplate_header -->
     
     <div id="tooplate_main">
-    <!--  
+
 		<div id="slider-wrapper">
         
             <div id="slider" class="nivoSlider">
-			
-                <img src="images/slider/toystory.jpg" alt="" />
-                <a href="http://dev7studios.com"><img src="images/slider/up.jpg" alt="" title="This is an example of a caption" /></a>
-                <img src="images/slider/walle.jpg" alt="" />
-                <img src="images/slider/nemo.jpg" alt="" title="#htmlcaption" />
+			<c:forEach items="${news}" var="n" begin="0" end="4">
+                <a href="${n.getIdNews()}"><img src= <c:url value="${n.getPicturesURL()}" /> width="620" height="300" alt="" title=${n.getTitle()} /></a>
+            </c:forEach>
             </div>
-            <div id="htmlcaption" class="nivo-html-caption">
-                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-            </div>
+
         
         </div>
         <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
@@ -93,7 +89,7 @@ ddsmoothmenu.init({
             $('#slider').nivoSlider();
         });
         </script>
-        -->
+
         
         
         <div class="cleaner h30"></div>
@@ -101,7 +97,7 @@ ddsmoothmenu.init({
         <div class="newscol col half">
 	        <h2>Football</h2>
 
-            <c:forEach items="${football}" var="n" begin="0" end="4">
+            <c:forEach items="${football}" var="n" begin="0" end="3">
             <div class="newsbox col one_fourth no_margin_right">
             <img href="${n.getIdNews()}" src= <c:url value="${n.getPicturesURL()}" /> width="75" height="75" alt="" />
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
@@ -112,7 +108,7 @@ ddsmoothmenu.init({
         
         <div class="newscol col half no_margin_right">
 	        <h2>Basketball</h2>
-            <c:forEach items="${basketball}" var="n" begin="0" end="4">
+            <c:forEach items="${basketball}" var="n" begin="0" end="3">
             <div class="newsbox col one_fourth no_margin_right">
             <img href="${n.getIdNews()}" src= <c:url value="${n.getPicturesURL()}" /> width="75" height="75" alt="" />
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
@@ -123,7 +119,7 @@ ddsmoothmenu.init({
         
         <div class="newscol col half">
 	        <h2>Volleyball</h2>
-            <c:forEach items="${volleyball}" var="n" begin="0" end="4">
+            <c:forEach items="${volleyball}" var="n" begin="0" end="3">
             <div class="newsbox col one_fourth no_margin_right">
             <img href="${n.getIdNews()}" src= <c:url value="${n.getPicturesURL()}" /> width="75" height="75" alt="" />
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
@@ -134,7 +130,7 @@ ddsmoothmenu.init({
         
         <div class="newscol col half no_margin_right">
 	        <h2>Formula1</h2>
-           <c:forEach items="${formula1}" var="n" begin="0" end="4">
+           <c:forEach items="${formula1}" var="n" begin="0" end="3">
             <div class="newsbox col one_fourth no_margin_right">
             <img href="${n.getIdNews()}" src= <c:url value="${n.getPicturesURL()}" /> width="75" height="75" alt="" />
             <h6><a href="${n.getIdNews()}"  >${n.getTitle()} </a></h6>
