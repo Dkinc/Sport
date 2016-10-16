@@ -27,21 +27,18 @@ public class CommentController {
 	public String addComment( Model model, @ModelAttribute Comment c, HttpSession s) {
 		CommentManager.getInstance().makeComment(c.getText(), LocalDateTime.now(), c.getIdNews(), s.getAttribute("loggedAs").toString());
 		News news = NewsManager.getInstance().getNewsByID(c.getIdNews());
-		
 		return "redirect:/" + Integer.toString(news.getIdNews());
 	}
 	
 	@RequestMapping(value="/likeComment" , method=RequestMethod.POST)
-	public String likeComment(@RequestParam("ID") int id, HttpSession s) {// idComment is hidden field in spring-form 
+	public String likeComment(@RequestParam("ID") int id, @RequestParam("NewsId") int idNews , HttpSession s) {// idComment is hidden field in spring-form 
 		CommentManager.getInstance().changeCommentAfterLike(id, s.getAttribute("loggedAs").toString());
-		News news = NewsManager.getInstance().getNewsByID(CommentManager.getInstance().getCommentByID(id).getIdNews());
-		return "redirect:/" + Integer.toString(news.getIdNews());
+		return "redirect:/" + idNews;
 	}
 	
 	@RequestMapping(value="/dislikeComment" , method=RequestMethod.POST)
-	public String dislikeComment( @RequestParam("ID") int id, HttpSession s) {// also
+	public String dislikeComment( @RequestParam("ID") int id,  @RequestParam("NewsId") int idNews , HttpSession s) {// also
 		CommentManager.getInstance().changeCommentAfterLike(id, s.getAttribute("loggedAs").toString());
-		News news = NewsManager.getInstance().getNewsByID(CommentManager.getInstance().getCommentByID(id).getIdNews());
-		return "redirect:/" + Integer.toString(news.getIdNews());
+		return "redirect:/" + idNews;
 	}
 }

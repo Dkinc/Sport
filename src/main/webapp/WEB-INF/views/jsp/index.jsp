@@ -41,7 +41,7 @@ ddsmoothmenu.init({
 	
     <div id="tooplate_header">
        <a href="index" id="branding"> <img src="images/logo.png"
-					alt="" width="42" height="36" class="logo"> </img> </a>
+					alt="" width="200" height="36" class="logo"> </img> </a>
 					
         <div id="tooplate_menu" class="ddsmoothmenu">
             <ul>
