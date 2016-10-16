@@ -68,7 +68,7 @@ ddsmoothmenu.init({
 	
     <div id="tooplate_header">
        <a href="index" id="branding"> <img src="images/logo.png"
-					alt="" class="logo"> </img> </a>
+					width="200" height="36" alt="" class="logo"> </img> </a>
 					
         <div id="tooplate_menu" class="ddsmoothmenu">
             <ul>
@@ -119,6 +119,9 @@ ddsmoothmenu.init({
                 </tr>
             </table>
         </form>
+        <c:if test="${msg != null}">
+ 	 		<div id="status_message">${msg}</div>
+		</c:if>
     </div>
 
 	</div> <!-- END of tooplate_main -->   

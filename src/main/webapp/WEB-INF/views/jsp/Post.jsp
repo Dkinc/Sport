@@ -54,7 +54,7 @@ function validate() {
 	
     <div id="tooplate_header">
        <a href="index" id="branding"> <img src="images/logo.png"
-					alt="" class="logo"> </img> </a>
+					alt="" width="200" height="36" class="logo"> </img> </a>
 					
         <div id="tooplate_menu" class="ddsmoothmenu">
             <ul>
@@ -106,16 +106,18 @@ function validate() {
 	                            <div class="comment_box commentbox1">  
 	                                <div class="comment_text">
 	                                    <div class="comment_author">${c.getUsername()} <span class="date">${c.getDateAndTime()}</span> </div>
-	                                    <p>${c.getText()}</p>
+	                                    <wbr>${c.getText()}</wbr>
 	                                    <p>Likes : ${c.getLikes()}</p>
 	                                    <p>Dislikes : ${c.getDislikes()}</p>
 	                                    <div>
 		                                    <form action="likeComment" method="post">
 													<input type="hidden" name="ID" value ="${c.getIdComment()}"/>
+													<input type="hidden" name="NewsId" value ="${news.getIdNews()}"/>
 													<input type="submit" class="submit_btn" name="submit" id="submit" value="Like" />
 											</form>
 											<form action="dislikeComment" method="post">
 												    <input type="hidden" name="ID" value = "${c.getIdComment()}"/>
+												    <input type="hidden" name="NewsId" value ="${news.getIdNews()}"/>
 												    <input type="submit" class="submit_btn" name="submit" id="submit" value="Dislike" />
 											</form>
 										</div>

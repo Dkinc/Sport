@@ -41,7 +41,7 @@ ddsmoothmenu.init({
 	
     <div id="tooplate_header">
        <a href="index" id="branding"> <img src="images/logo.png"
-					alt="" width="42" height="36" class="logo"> </img> </a>
+					alt="" width="200" height="36" class="logo"> </img> </a>
 					
         <div id="tooplate_menu" class="ddsmoothmenu">
             <ul>
@@ -65,6 +65,11 @@ ddsmoothmenu.init({
 				<c:if test = "${sessionScope.loggedAs == 'admin'}">
                 	<li><a href="addnews">AddNews</a></li>
 				</c:if>
+				<!--  
+				<form action="search" method="post">
+				  <li><input type="text" name="Search" placeholder="Search.."></li>
+				</form>
+				-->
             </ul>
             <br style="clear: left" />
         </div> <!-- end of tooplate_menu -->

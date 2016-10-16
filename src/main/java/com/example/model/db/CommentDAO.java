@@ -30,11 +30,13 @@ public class CommentDAO {
 			HashSet<Comment> comments = new HashSet<Comment>();
 			try {
 				Statement st = DBManager.getInstance().getConnection().createStatement();
+
 				ResultSet resultSet = st.executeQuery("SELECT C.idComments, C.text, C.date_and_time, C.number_of_likes,"
 						+ " C.number_of_dislikes, U.username, N.idNews"
 						+ " FROM comments C INNER JOIN users U ON C.Users_idUsers = U.idUsers"
 						+ " INNER JOIN news N ON C.News_idNews = N.idNews"
 						+ " ORDER BY idNews Desc;");
+
 				while(resultSet.next()){
 					
 					Comment c = new Comment(	resultSet.getInt("idComments"),
@@ -50,6 +52,7 @@ public class CommentDAO {
 				}
 			} catch (SQLException e) {
 				System.out.println("PROBLEMS in getAllComments!!!");
+
 				e.printStackTrace();
 			}
 			
@@ -75,13 +78,13 @@ public class CommentDAO {
 				st.executeUpdate();
 				System.out.println("Comment added in db");
 				// kak da vzema idComment na dobaveniq komentar!!!
-				ResultSet rs = st.getGeneratedKeys();
-				if(rs.next())
-	            {
-	                int last_inserted_id = rs.getInt(1);
-	                c.setIdComment(last_inserted_id);
-	            }
-				System.out.println("Comment added successfully");
+//				ResultSet rs = st.getGeneratedKeys();
+//				if(rs.next())
+//	            {
+//	                int last_inserted_id = rs.getInt(1);
+//	                c.setIdComment(last_inserted_id);
+//	            }
+//				System.out.println("Comment added successfully");
 			} catch (SQLException e) {
 				System.out.println("did not save the comment");
 				e.printStackTrace();
