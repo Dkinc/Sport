@@ -102,6 +102,14 @@ public class NewsController {
 		return "category";
 	}
 	
+	@RequestMapping(value="/search", method=RequestMethod.POST)
+	public String search(@RequestParam("Search") String search, Model model) {
+		HashSet<News> searchResults = NewsManager.getInstance().searchNewsByCategory(search);
+		model.addAttribute("news", searchResults);
+		model.addAttribute("category", "Search Results:");
+		return "category";
+	}
+	
 	@RequestMapping(value="/basketball", method=RequestMethod.GET)
 	public String getBasketball(Model model) {
 		HashSet<News> basketballNews = NewsManager.getInstance().searchNewsByCategory("basketball");

@@ -38,7 +38,7 @@ public class CommentController {
 	
 	@RequestMapping(value="/dislikeComment" , method=RequestMethod.POST)
 	public String dislikeComment( @RequestParam("ID") int id,  @RequestParam("NewsId") int idNews , HttpSession s) {// also
-		CommentManager.getInstance().changeCommentAfterLike(id, s.getAttribute("loggedAs").toString());
+		CommentManager.getInstance().changeCommentAfterDislike(id, s.getAttribute("loggedAs").toString());
 		return "redirect:/" + idNews;
 	}
 }

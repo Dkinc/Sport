@@ -65,6 +65,11 @@ ddsmoothmenu.init({
 				<c:if test = "${sessionScope.loggedAs == 'admin'}">
                 	<li><a href="addnews">AddNews</a></li>
 				</c:if>
+				<!--  
+				<form action="search" method="post">
+				  <li><input type="text" name="Search" placeholder="Search.."></li>
+				</form>
+				-->
             </ul>
             <br style="clear: left" />
         </div> <!-- end of tooplate_menu -->

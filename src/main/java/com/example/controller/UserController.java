@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.User;
 import com.example.model.UsersManager;
@@ -94,8 +95,11 @@ public class UserController {
 		String username = (String) s.getAttribute("loggedAs");
 		if (UsersManager.getInstance().validLogin(username.toLowerCase(), oldPass)) {
 			if (newPass1.equals(newPass2)) {
+				model.addAttribute("msg", "Password changed successfully");
 				UsersManager.getInstance().getUser(username).changePassword(newPass1);
-				model.addAttribute("SUCCESS_MESSAGE", "Password changed successfully");
+			}
+			else{
+				model.addAttribute("msg", "Password change failed");
 			}
 		}
 

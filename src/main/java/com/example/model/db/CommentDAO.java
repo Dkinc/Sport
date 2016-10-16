@@ -31,21 +31,21 @@ public class CommentDAO {
 				Statement st = DBManager.getInstance().getConnection().createStatement();
 				ResultSet resultSet = st.executeQuery("SELECT C.idComments, C.text, C.date_and_time, U.username, N.idNews"
 						+ " FROM comments C JOIN users U ON C.Users_idUsers = U.idUsers"
-						+ "JOIN news N ON C.News_idNews = N.idNews"
+						+ " JOIN news N ON C.News_idNews = N.idNews"
 						+ " ORDER BY date_and_time Desc;");
 				while(resultSet.next()){
 					
 					Comment c = new Comment(	resultSet.getInt("idComments"),
 												resultSet.getString("text"),
 												resultSet.getTimestamp("date_and_time").toLocalDateTime(),
-												resultSet.getInt("News_idNews"),
+												resultSet.getInt("idNews"),
 												resultSet.getString("username")
 											);
 					comments.add(c);
 				}
 			} catch (SQLException e) {
 				System.out.println("cannot make statement in getAllComments!!!");
-				return comments;
+				e.printStackTrace();
 			}
 			System.out.println("Comments loaded successfully");
 			return comments;
@@ -69,13 +69,13 @@ public class CommentDAO {
 				st.executeUpdate();
 				System.out.println("Comment added in db");
 				// kak da vzema idComment na dobaveniq komentar!!!
-				ResultSet rs = st.getGeneratedKeys();
-				if(rs.next())
-	            {
-	                int last_inserted_id = rs.getInt(1);
-	                c.setIdComment(last_inserted_id);
-	            }
-				System.out.println("Comment added successfully");
+//				ResultSet rs = st.getGeneratedKeys();
+//				if(rs.next())
+//	            {
+//	                int last_inserted_id = rs.getInt(1);
+//	                c.setIdComment(last_inserted_id);
+//	            }
+//				System.out.println("Comment added successfully");
 			} catch (SQLException e) {
 				System.out.println("did not save the comment");
 				e.printStackTrace();

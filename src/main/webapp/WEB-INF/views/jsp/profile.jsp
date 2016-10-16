@@ -119,6 +119,9 @@ ddsmoothmenu.init({
                 </tr>
             </table>
         </form>
+        <c:if test="${msg != null}">
+ 	 		<div id="status_message">${msg}</div>
+		</c:if>
     </div>
 
 	</div> <!-- END of tooplate_main -->   
