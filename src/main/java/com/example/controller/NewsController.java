@@ -91,7 +91,7 @@ public class NewsController {
 //			System.out.println("Error with pic to resp!!");
 //			e.printStackTrace();
 //		}
-		return "post";
+		return "Post";
 	}
 	
 	@RequestMapping(value="/football", method=RequestMethod.GET)

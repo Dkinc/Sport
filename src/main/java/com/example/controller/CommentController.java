@@ -40,7 +40,7 @@ public class CommentController {
 	
 	@RequestMapping(value="/dislikeComment" , method=RequestMethod.POST)
 	public String dislikeComment( @RequestParam("ID") int id, HttpSession s) {// also
-		CommentManager.getInstance().changeCommentAfterLike(id, s.getAttribute("loggedAs").toString());
+		CommentManager.getInstance().changeCommentAfterDislike(id, s.getAttribute("loggedAs").toString());
 		News news = NewsManager.getInstance().getNewsByID(CommentManager.getInstance().getCommentByID(id).getIdNews());
 		return "redirect:/" + Integer.toString(news.getIdNews());
 	}

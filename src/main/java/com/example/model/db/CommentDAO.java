@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 
 import com.example.model.Comment;
+import com.example.model.CommentManager;
 import com.example.model.UsersManager;
 
 public class CommentDAO {
@@ -29,25 +30,29 @@ public class CommentDAO {
 			HashSet<Comment> comments = new HashSet<Comment>();
 			try {
 				Statement st = DBManager.getInstance().getConnection().createStatement();
-				ResultSet resultSet = st.executeQuery("SELECT C.idComments, C.text, C.date_and_time, U.username, N.idNews"
-						+ " FROM comments C JOIN users U ON C.Users_idUsers = U.idUsers"
-						+ "JOIN news N ON C.News_idNews = N.idNews"
-						+ " ORDER BY date_and_time Desc;");
+				ResultSet resultSet = st.executeQuery("SELECT C.idComments, C.text, C.date_and_time, C.number_of_likes,"
+						+ " C.number_of_dislikes, U.username, N.idNews"
+						+ " FROM comments C INNER JOIN users U ON C.Users_idUsers = U.idUsers"
+						+ " INNER JOIN news N ON C.News_idNews = N.idNews"
+						+ " ORDER BY idNews Desc;");
 				while(resultSet.next()){
 					
 					Comment c = new Comment(	resultSet.getInt("idComments"),
 												resultSet.getString("text"),
 												resultSet.getTimestamp("date_and_time").toLocalDateTime(),
-												resultSet.getInt("News_idNews"),
+												resultSet.getInt("idNews"),
 												resultSet.getString("username")
 											);
+					c.setLikes(resultSet.getInt("number_of_likes"));
+					c.setDislikes(resultSet.getInt("number_of_dislikes"));
 					comments.add(c);
+					System.out.println("Comments loaded successfully");
 				}
 			} catch (SQLException e) {
-				System.out.println("cannot make statement in getAllComments!!!");
-				return comments;
+				System.out.println("PROBLEMS in getAllComments!!!");
+				e.printStackTrace();
 			}
-			System.out.println("Comments loaded successfully");
+			
 			return comments;
 		}
 		
@@ -55,7 +60,8 @@ public class CommentDAO {
 		public void addComment(Comment c){
 			try {
 				PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO comments ( text,"
-						+ " date_and_time, News_idNews, Users_idUsers, number_of_likes, number_of_dislikes) VALUES (?,?,?,?,?,?);");
+						+ " date_and_time, News_idNews, Users_idUsers, number_of_likes, number_of_dislikes) VALUES (?,?,?,?,?,?);",
+						Statement.RETURN_GENERATED_KEYS);
 				
 				Calendar cal = Calendar.getInstance();
 				
@@ -107,17 +113,18 @@ public class CommentDAO {
 		public void addUserLike(int idComment, String username) {
 			try {
 				PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO like_comments_by_user ( Comments_idComments,"
-						+ " users_that_like_comment) VALUES (?,?);");// ako e nuzhno mozhe da se naprawi query s 4 parametura// za sega ne e nuzhno
+						+ " users_that_like_comment, Comments_Users_idUsers, Comments_News_idNews) VALUES (?,?,?,?);");
 			
 				
 				st.setInt(1, idComment);
-				st.setString(2, username);;
-				
+				st.setString(2, username);
+				st.setInt(3, UsersManager.getInstance().getUser(CommentManager.getInstance().getCommentByID(idComment).getUsername()).getIdUser());
+				st.setInt(4, CommentManager.getInstance().getCommentByID(idComment).getIdNews());
 				
 				st.executeUpdate();
-				System.out.println("Comment added successfully");
+				System.out.println("UserLike added successfully in like_comments_by_user");
 			} catch (SQLException e) {
-				System.out.println("did not save the comment");
+				System.out.println("did not save UserLike in the like_comments_by_user");
 				e.printStackTrace();
 			}		
 			
@@ -126,17 +133,18 @@ public class CommentDAO {
 		public void addUserDislike(int idComment, String username) {
 			try {
 				PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement("INSERT INTO dislike_comments_by_user ( Comments_idComments,"
-						+ " users_that_dislike_comment) VALUES (?,?);");// su6toto ...
+						+ " users_that_dislike_comment, Comments_Users_idUsers, Comments_News_idNews) VALUES (?,?,?,?);");
 			
 				
 				st.setInt(1, idComment);
-				st.setString(2, username);;
-				
+				st.setString(2, username);
+				st.setInt(3, UsersManager.getInstance().getUser(CommentManager.getInstance().getCommentByID(idComment).getUsername()).getIdUser());
+				st.setInt(4, CommentManager.getInstance().getCommentByID(idComment).getIdNews());
 				
 				st.executeUpdate();
-				System.out.println("Comment added successfully");
+				System.out.println("UserDislike added successfully in dislike_comments_by_user");
 			} catch (SQLException e) {
-				System.out.println("did not save the comment");
+				System.out.println("did not save UserDislike in the dislike_comments_by_user");
 				e.printStackTrace();
 			}		
 			
