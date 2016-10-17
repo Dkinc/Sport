@@ -7,7 +7,7 @@ import com.example.model.db.CommentDAO;
 
 public class CommentManager {
 
-private static int uniqeCommentId = 0;
+private static int uniqeCommentId;
 private HashSet<Comment> allComments;
 	
 	
@@ -20,6 +20,9 @@ private HashSet<Comment> allComments;
 			if(c.getIdComment() > uniqeCommentId){
 				uniqeCommentId = c.getIdComment();
 			}
+			else{
+				uniqeCommentId = 0;
+			}
 		}
 	}
 	
@@ -31,7 +34,7 @@ private HashSet<Comment> allComments;
 	}
 	
 	public synchronized void makeComment(String text, LocalDateTime dateAndTime, int idNews, String username){
-		Comment c = new Comment(++uniqeCommentId ,text, dateAndTime, idNews, username);
+		Comment c = new Comment(text, dateAndTime, idNews, username);
 		CommentDAO.getInstance().addComment(c); // c has setter for idComment !!! And push in allComments with id!!
 		allComments.add(c);
 		NewsManager.getInstance().getNewsByID(idNews).addComment(c);// push in list of all comments for the news

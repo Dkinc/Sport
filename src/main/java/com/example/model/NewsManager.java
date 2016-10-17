@@ -22,6 +22,7 @@ public HashSet<String> categories;
 			if(n.getIdNews() > uniqeNewsId){
 				uniqeNewsId = n.getIdNews();
 			}
+			loadAllCommentsForNews(n);
 			allNews.add(n);
 		}
 		categories = new HashSet<String>();

@@ -40,6 +40,5 @@ public class CommentController {
 	public String dislikeComment( @RequestParam("ID") int id,  @RequestParam("NewsId") int idNews , HttpSession s) {// also
 		CommentManager.getInstance().changeCommentAfterDislike(id, s.getAttribute("loggedAs").toString());
 		return "redirect:/" + idNews;
-
 	}
 }

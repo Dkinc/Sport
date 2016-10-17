@@ -78,13 +78,13 @@ public class CommentDAO {
 				st.executeUpdate();
 				System.out.println("Comment added in db");
 				// kak da vzema idComment na dobaveniq komentar!!!
-//				ResultSet rs = st.getGeneratedKeys();
-//				if(rs.next())
-//	            {
-//	                int last_inserted_id = rs.getInt(1);
-//	                c.setIdComment(last_inserted_id);
-//	            }
-//				System.out.println("Comment added successfully");
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next())
+	            {
+	                int last_inserted_id = rs.getInt(1);
+	                c.setIdComment(last_inserted_id);
+	            }
+				System.out.println("Comment added successfully");
 			} catch (SQLException e) {
 				System.out.println("did not save the comment");
 				e.printStackTrace();

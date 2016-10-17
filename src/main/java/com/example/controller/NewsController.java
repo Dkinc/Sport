@@ -38,8 +38,6 @@ public class NewsController {
 	
 	private static final String IMAGES_LOCATION = "img/";
 	
-	@Autowired
-	private MessageSource messageSource;
 
 	@RequestMapping(value="/addnews", method=RequestMethod.GET)
 	public String getAddNews(HttpSession s, Model model) {
@@ -91,7 +89,7 @@ public class NewsController {
 //			System.out.println("Error with pic to resp!!");
 //			e.printStackTrace();
 //		}
-		return "Post";
+		return "post";
 	}
 	
 	@RequestMapping(value="/football", method=RequestMethod.GET)

@@ -106,21 +106,23 @@ function validate() {
 	                            <div class="comment_box commentbox1">  
 	                                <div class="comment_text">
 	                                    <div class="comment_author">${c.getUsername()} <span class="date">${c.getDateAndTime()}</span> </div>
-	                                    <wbr>${c.getText()}</wbr>
-	                                    <p>Likes : ${c.getLikes()}</p>
-	                                    <p>Dislikes : ${c.getDislikes()}</p>
-	                                    <div>
-		                                    <form action="likeComment" method="post">
-													<input type="hidden" name="ID" value ="${c.getIdComment()}"/>
-													<input type="hidden" name="NewsId" value ="${news.getIdNews()}"/>
-													<input type="submit" class="submit_btn" name="submit" id="submit" value="Like" />
-											</form>
-											<form action="dislikeComment" method="post">
-												    <input type="hidden" name="ID" value = "${c.getIdComment()}"/>
-												    <input type="hidden" name="NewsId" value ="${news.getIdNews()}"/>
-												    <input type="submit" class="submit_btn" name="submit" id="submit" value="Dislike" />
-											</form>
-										</div>
+	                                    <wbr>${c.getText()}</wbr><br>
+	                                    <p>Likes : ${c.getLikes()}
+	                                    Dislikes : ${c.getDislikes()}</p>
+	                                    <c:if test = "${sessionScope.loggedAs != null}">
+	                            	        <div>
+		                    	                <form action="likeComment" method="post">
+														<input type="hidden" name="ID" value ="${c.getIdComment()}"/>
+														<input type="hidden" name="NewsId" value ="${news.getIdNews()}"/>
+														<input type="submit" class="submit_btn" name="submit" id="submit" value="Like" />
+												</form>
+												<form action="dislikeComment" method="post">
+													    <input type="hidden" name="ID" value = "${c.getIdComment()}"/>
+													    <input type="hidden" name="NewsId" value ="${news.getIdNews()}"/>
+													    <input type="submit" class="submit_btn" name="submit" id="submit" value="Dislike" />
+												</form>
+											</div>
+ 						               </c:if>
 	                                </div>
 	                                <div class="cleaner"></div>
 	                            </div>                        
@@ -147,7 +149,7 @@ function validate() {
                     
                 </c:if>
                 <c:if test = "${sessionScope.loggedAs == null}">
-                <h4>Please Log in or Register to leave a comment</h4>
+                	<h4>Please Log in or Register to leave a comment</h4>
                 </c:if>
             	</div>
             	

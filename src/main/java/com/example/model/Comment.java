@@ -18,8 +18,18 @@ public class Comment {
 
 	public Comment(){}
 
+	public Comment(String text, LocalDateTime dateAndTime, int idNews, String username ) {
+		this.setIdNews(idNews);
+		this.username = username;
+		this.text = text;
+		this.dateAndTime = dateAndTime;
+		this.usernames = new ArrayList<String>();
+		this.likes = 0;
+		this.dislikes = 0;
+	}
+	
 	public Comment(int id, String text, LocalDateTime dateAndTime, int idNews, String username ) {
-		
+		this.idComment = id;
 		this.setIdNews(idNews);
 		this.username = username;
 		this.text = text;
