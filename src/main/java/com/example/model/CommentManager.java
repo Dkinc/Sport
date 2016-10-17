@@ -41,9 +41,18 @@ private HashSet<Comment> allComments;
 		
 	}
 	
-	public synchronized void changeCommentAfterLike(int idComment, String username){
+	public synchronized void changeCommentAfterLike(int idComment, String username , int idNews){
 		// check if user already like the comment
 		for (Comment c : allComments) {
+			if(c.getIdComment() == idComment){
+				if(c.getUsernames().contains(username)){
+					return;
+				}
+				c.addUsername(username);
+				c.likeComment();
+			}
+		}
+		for (Comment c : NewsManager.getInstance().getNewsByID(idNews).comments) {
 			if(c.getIdComment() == idComment){
 				if(c.getUsernames().contains(username)){
 					return;
@@ -56,7 +65,7 @@ private HashSet<Comment> allComments;
 		CommentDAO.getInstance().addUserLike(idComment, username);
 	}
 	
-	public synchronized void changeCommentAfterDislike(int idComment, String username){
+	public synchronized void changeCommentAfterDislike(int idComment, String username , int idNews){
 		// check if user already dislike the comment
 		for (Comment c : allComments) {
 			if(c.getIdComment() == idComment){
@@ -65,6 +74,15 @@ private HashSet<Comment> allComments;
 				}
 				c.addUsername(username);
 				c.dislikeComment();
+			}
+		}
+		for (Comment c : NewsManager.getInstance().getNewsByID(idNews).comments) {
+			if(c.getIdComment() == idComment){
+				if(c.getUsernames().contains(username)){
+					return;
+				}
+				c.addUsername(username);
+				c.likeComment();
 			}
 		}
 		CommentDAO.getInstance().addChangeAfterDislikeComment(idComment);

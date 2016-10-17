@@ -31,7 +31,7 @@ public class UserController {
 	@RequestMapping(value = "/registerFailed", method = RequestMethod.POST)
 	public String registerf(@ModelAttribute User u) {
 		if (UsersManager.getInstance().regUser(u.getUsername().toLowerCase(), u.getPassword(), u.getEmail())) {
-			return "index";
+			return "redirect:index";
 		}
 		return "registerFailed";
 	}
@@ -39,7 +39,7 @@ public class UserController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(@ModelAttribute User u) {
 		if (UsersManager.getInstance().regUser(u.getUsername().toLowerCase(), u.getPassword(), u.getEmail())) {
-			return "index";
+			return "redirect:index";
 		}
 		return "registerFailed";
 	}

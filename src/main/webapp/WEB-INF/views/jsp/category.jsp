@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Sportal</title>
+<title>Sports News</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!--
@@ -31,6 +31,11 @@ ddsmoothmenu.init({
 })
 
 </script> 
+<style>
+input {
+    width: 100%;
+}
+</style>
 
 
 </head>
@@ -72,7 +77,11 @@ ddsmoothmenu.init({
     
     <div id="tooplate_main">
    
-        
+        <form name = "search" action = "search" method = "post" onsubmit = "return validation()" align = "center">
+              <input name = search type="text" placeholder="Search news here..." width: 100% required>
+		</form>
+		<br />
+		
         <div class="col one_third">
         	<h5>${category}</h5>
         	<c:forEach items="${news}" var="n" begin="0" end="4">

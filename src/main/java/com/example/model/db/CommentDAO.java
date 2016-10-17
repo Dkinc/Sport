@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.HashSet;
 
@@ -66,10 +67,9 @@ public class CommentDAO {
 						+ " date_and_time, News_idNews, Users_idUsers, number_of_likes, number_of_dislikes) VALUES (?,?,?,?,?,?);",
 						Statement.RETURN_GENERATED_KEYS);
 				
-				Calendar cal = Calendar.getInstance();
-				
+				Timestamp ts = Timestamp.valueOf(c.getDateAndTime());
 				st.setString(1, c.getText());
-				st.setDate(2, new java.sql.Date(cal.getTimeInMillis()));
+				st.setTimestamp(2, ts);
 				st.setInt(3, c.getIdNews());
 				st.setInt(4, UsersManager.getInstance().getUser(c.getUsername()).getIdUser());
 				st.setInt(5, c.getLikes());

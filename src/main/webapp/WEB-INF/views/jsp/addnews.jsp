@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Sportal</title>
+<title>Sports News</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!--
@@ -46,7 +46,7 @@ http://www.tooplate.com/view/2060-newspaper
 		var title = document.addNews.title.value;
 		var file = document.addNews.picturesurl.value;
 		if (title == "") {
-			alert("Fill the fields!");
+			alert("No title selected!");
 			title.focus();
 			return false;
 		} 
@@ -93,6 +93,9 @@ http://www.tooplate.com/view/2060-newspaper
 						<li><a href="profile">Profile</a></li>
 						<li><a href="logout">Logout</a></li>
 					</c:if>
+					<c:if test = "${sessionScope.loggedAs == 'admin'}">
+                		<li><a href="addnews">AddNews</a></li>
+					</c:if>
 				</ul>
 				<br style="clear: left" />
 			</div>
@@ -112,17 +115,19 @@ http://www.tooplate.com/view/2060-newspaper
 						</tr>
 						<tr>
 							<td>Title:</td>
-							<td><form:input path="title" /></td>
+							<td><form:input path="title" minlength ="5" required="required"/></td>
 						</tr>
 						<tr>
 							<td>Body:</td>
-							<td><form:textarea path="text"/></td>
+							<td><form:textarea path="text" /></td>
 						</tr>
 						 <tr>
                    		 	<td>Category:</td>
 		                    <td>
 		                    <form:select  path="category">
-						    <form:option value="NONE"> --SELECT--</form:option>
+		                    <!--  
+						    <form:option value="null"> --SELECT--</form:option>
+						    -->
 						    <form:options items="${categories}"></form:options>
 						  </form:select> 	</td>
                			 </tr>

@@ -10,7 +10,7 @@ public class News {
 	private String text;
 	private String category;
 //	private TreeSet<String> picturesURL;// picures for concrete news, #pictures = equal or more than 1 and less than 5 - complicated.More columns for pics in db .
-	private List<Comment> comments;
+	public List<Comment> comments;
 	private String picturesURL;
 	private String videoURL;
 	private int numberOfReads;
@@ -103,7 +103,6 @@ public class News {
 	}
 
 	public List<Comment> getAllCommentsForNews(){
-		 		
 		  		return  Collections.unmodifiableList (comments);
 		  	}
 }

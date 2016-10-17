@@ -6,18 +6,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,9 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.model.Comment;
 import com.example.model.News;
@@ -55,21 +46,24 @@ public class NewsController {
 	@RequestMapping(value="/addnews" , method=RequestMethod.POST)
 	public String addNews(@RequestParam("picturesurl") MultipartFile multiPartFile, Model model ,@ModelAttribute News n) {
 		if(NewsManager.getInstance().validateNews(n.getTitle(), n.getText(), n.getCategory(), multiPartFile)){
-			System.out.println("Validation Succsessful!");
-			File fileOnDisk = new File("D:\\java\\workspace\\SpringDK\\MyProject\\src\\main\\webapp\\static\\img\\" + multiPartFile.getOriginalFilename());
-			try {
-				fileOnDisk.createNewFile();
-				Files.copy(multiPartFile.getInputStream(), fileOnDisk.toPath(), StandardCopyOption.REPLACE_EXISTING);
-			} catch (IOException e) {
-				System.out.println("ERROR UPLOADING FILE!!!");
-				e.printStackTrace();
+			if(n.getCategory() != "" || n.getCategory().isEmpty() || n.getCategory() != null){
+				System.out.println("Validation Succsessful!");
+				File fileOnDisk = new File("D:\\java\\workspace\\SpringDK\\MyProject\\src\\main\\webapp\\static\\img\\" + multiPartFile.getOriginalFilename());
+				try {
+					fileOnDisk.createNewFile();
+					Files.copy(multiPartFile.getInputStream(), fileOnDisk.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				} catch (IOException e) {
+					System.out.println("ERROR UPLOADING FILE!!!");
+					e.printStackTrace();
+				}
+				model.addAttribute("filename", multiPartFile.getOriginalFilename());
+				NewsManager.getInstance().makeNews(n.getTitle(), n.getText(), n.getCategory(), IMAGES_LOCATION + multiPartFile.getOriginalFilename());
+				model.addAttribute("SUCCESS_MESSAGE", "News Added Successfully");
+				return "redirect:addnews";
 			}
-			model.addAttribute("filename", multiPartFile.getOriginalFilename());
-			NewsManager.getInstance().makeNews(n.getTitle(), n.getText(), n.getCategory(), IMAGES_LOCATION + multiPartFile.getOriginalFilename());
-			model.addAttribute("SUCCESS_MESSAGE", "News Added Successfully");
 		}
-		
-		return "addnews";
+		model.addAttribute("SUCCESS_MESSAGE", "Adding News Failed");
+		return "redirect:addnews";
 	}
 	
 	@RequestMapping(value="/{idNews}", method=RequestMethod.GET)
@@ -92,6 +86,16 @@ public class NewsController {
 		return "post";
 	}
 	
+	
+	@RequestMapping(value="/search", method=RequestMethod.POST)
+	public String search(@RequestParam("search") String text, Model model) {
+		HashSet<News> searchResults = NewsManager.getInstance().searchNewsByTitle(text);
+		model.addAttribute("news", searchResults);
+		model.addAttribute("category", "Search Results:");
+		return "category";
+	}
+
+	
 	@RequestMapping(value="/football", method=RequestMethod.GET)
 	public String getFootball(Model model) {
 		HashSet<News> footballNews = NewsManager.getInstance().searchNewsByCategory("Football");
@@ -100,13 +104,6 @@ public class NewsController {
 		return "category";
 	}
 	
-	@RequestMapping(value="/search", method=RequestMethod.POST)
-	public String search(@RequestParam("Search") String search, Model model) {
-		HashSet<News> searchResults = NewsManager.getInstance().searchNewsByCategory(search);
-		model.addAttribute("news", searchResults);
-		model.addAttribute("category", "Search Results:");
-		return "category";
-	}
 	
 	@RequestMapping(value="/basketball", method=RequestMethod.GET)
 	public String getBasketball(Model model) {

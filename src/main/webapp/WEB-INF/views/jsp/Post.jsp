@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Sportal</title>
+<title>Sports News</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!--
@@ -75,6 +75,9 @@ function validate() {
                 	<li><a href="profile">Profile</a></li>
                 	<li><a href="logout">Logout</a></li>
 				</c:if>
+				<c:if test = "${sessionScope.loggedAs == 'admin'}">
+                	<li><a href="addnews">AddNews</a></li>
+				</c:if>
             </ul>
             <br style="clear: left" />
         </div> <!-- end of tooplate_menu -->
@@ -140,7 +143,7 @@ function validate() {
 	                        
 	                        <div class="form_row">
 	                            <label>Your comment</label><br />
-	                            <form:textarea path="text" />
+	                            <form:textarea path="text" minlength = "2" required="required" />
 	                            <form:hidden path="idNews" value = "${news.getIdNews()}" />
 	                        </div>
 	

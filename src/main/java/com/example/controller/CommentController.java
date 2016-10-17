@@ -4,7 +4,6 @@ package com.example.controller;
 
 import java.time.LocalDateTime;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -32,13 +31,13 @@ public class CommentController {
 	
 	@RequestMapping(value="/likeComment" , method=RequestMethod.POST)
 	public String likeComment(@RequestParam("ID") int id, @RequestParam("NewsId") int idNews , HttpSession s) {// idComment is hidden field in spring-form 
-		CommentManager.getInstance().changeCommentAfterLike(id, s.getAttribute("loggedAs").toString());
+		CommentManager.getInstance().changeCommentAfterLike( id, s.getAttribute("loggedAs").toString() , idNews );
 		return "redirect:/" + idNews;
 	}
 	
 	@RequestMapping(value="/dislikeComment" , method=RequestMethod.POST)
-	public String dislikeComment( @RequestParam("ID") int id,  @RequestParam("NewsId") int idNews , HttpSession s) {// also
-		CommentManager.getInstance().changeCommentAfterDislike(id, s.getAttribute("loggedAs").toString());
+	public String dislikeComment(@RequestParam("ID") int id,  @RequestParam("NewsId") int idNews , HttpSession s) {// also
+		CommentManager.getInstance().changeCommentAfterDislike(id, s.getAttribute("loggedAs").toString() , idNews);
 		return "redirect:/" + idNews;
 	}
 }

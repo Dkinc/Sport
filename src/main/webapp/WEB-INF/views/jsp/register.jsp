@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Sportal</title>
+<title>Sports News</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!--
@@ -133,19 +133,19 @@ ddsmoothmenu.init({
 						</tr>
 						<tr>
 							<td>User Name:</td>
-							<td><input type="text" name="username" required/></td>
+							<td><input type="text" name="username" minlength="3" required maxlength="45"/></td>
 						</tr>
 						<tr>
 							<td>Password:</td>
-							<td><input type="password" name="password" required/></td>
+							<td><input type="password" name="password" minlength="6" required maxlength="45"/></td>
 						</tr>
 						<tr>
 							<td>Repeat Password:</td>
-							<td><input type="password" name="password_cnf"  required/></td>
+							<td><input type="password" name="password_cnf" minlength="6"  required maxlength="45"/></td>
 						</tr>
 						<tr>
 							<td>E-mail:</td>
-							<td><input type="text" name="email" required/></td>
+							<td><input type="text" name="email" required maxlength="99"/></td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center"><input type="submit"
